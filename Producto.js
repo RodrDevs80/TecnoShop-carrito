@@ -1,5 +1,5 @@
 class Producto {
-    constructor(nombre, precio, descripcion = "", imagen, categoria = "", cantidad = 1) {
+    constructor(nombre, precio, descripcion = "", imagen, categoria = "electrónica", cantidad = 1) {
         if (typeof nombre !== 'string') {
             throw new Error('El nombre debe ser un string');
         }

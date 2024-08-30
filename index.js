@@ -16,16 +16,16 @@ const producto6 = new Producto("Samsung 49-Inch CHG90 144Hz Curved Gaming Monito
 const contenedorProductos = document.getElementById('contenedor-productos');
 const compras = document.getElementById('compras');
 let indiceId = 0;
-
-carrito.agregarProducto(producto1);
-carrito.agregarProducto(producto2);
-carrito.agregarProducto(producto3);
-carrito.agregarProducto(producto4);
-carrito.agregarProducto(producto5);
-carrito.agregarProducto(producto6);
+const productosArreglo = [];
+productosArreglo.push(producto1);
+productosArreglo.push(producto2);
+productosArreglo.push(producto3);
+productosArreglo.push(producto4);
+productosArreglo.push(producto5);
+productosArreglo.push(producto6);
 
 const cargarProductosEnPagina = () => {
-    carrito.productos.forEach((producto) => contenedorProductos.innerHTML +=
+    productosArreglo.forEach((producto) => contenedorProductos.innerHTML +=
         `<div class="tarjeta-Producto">
     <h4 class="nombre-producto">${producto.nombre}</h4>
     <img class="img-producto" src=${producto.imagen} alt=${producto.nombre}>
@@ -46,7 +46,17 @@ const cargarProductosEnPagina = () => {
     );
     const botonesAgregarCarrito = document.querySelectorAll('#btn-agregar-carrito');
     if (botonesAgregarCarrito) {
-        botonesAgregarCarrito.forEach((btn) => btn.addEventListener('click', (e) => { compras.textContent = Number(compras.textContent) + Number(e.target.parentNode.children[3].children[1].value) }));
+        botonesAgregarCarrito.forEach((btn) => btn.addEventListener('click', (e) => {
+            compras.textContent = Number(compras.textContent) + Number(e.target.parentNode.children[3].children[1].value)
+            //depuración
+            /* console.log(e.target.parentNode.children[0].textContent);
+            console.log(e.target.parentNode.children[1].src);
+            console.log(e.target.parentNode.children[2].textContent);
+            console.log(Number(e.target.parentNode.children[3].children[1].value));
+            console.log(Number(e.target.parentNode.children[4].textContent.split(' ')[0].split("💲")[1])); */
+            carrito.agregarProducto(new Producto(e.target.parentNode.children[0].textContent, Number(e.target.parentNode.children[4].textContent.split(' ')[0].split("💲")[1]), e.target.parentNode.children[2].textContent, e.target.parentNode.children[1].src, "electronica", Number(e.target.parentNode.children[3].children[1].value)));
+            console.log(carrito.productos);
+        }));
     }
 }
 
