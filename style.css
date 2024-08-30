@@ -1,0 +1,335 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Orbitron, Roboto Mono, sans-serif;
+  background: #161623;
+}
+.nav {
+  border-bottom: 1px solid #eaeaeb;
+  text-align: right;
+  line-height: 70px;
+  background: #d6eaf8;
+  width: 100%;
+}
+.menu {
+  margin: 0 30px 0 0;
+}
+.menu a {
+  clear: right; /* 3 */
+  text-decoration: none;
+  color: gray;
+  margin: 0 10px;
+  line-height: 70px;
+}
+.menu a:hover {
+  cursor: pointer;
+  color: rgba(0, 255, 0, 0.8);
+}
+span {
+  color: #54d17a;
+}
+label {
+  margin: 0 40px 0 0; /*margin: 10px 3px 30px 5px; 10px arriba, 3px derecha, 30px abajo, 5px izquierda */
+  font-size: 26px;
+  line-height: 70px;
+  display: none;
+  width: 26px;
+  float: right;
+}
+#toggle {
+  display: none;
+}
+.compras {
+  font-size: 1.8rem;
+}
+.titulo {
+  text-align: center;
+  margin-bottom: 0;
+}
+.contenedor-productos {
+  margin: 80px 10px 15px 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.tarjeta-Producto {
+  width: 35%;
+  margin: 20px;
+  box-shadow: 6px 6px 50px rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  font-size: 1rem;
+  padding: 25px;
+}
+
+.tarjeta-Producto p {
+  font-size: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+.tarjeta-Producto .precio {
+  text-align: left;
+}
+.nombre-producto {
+  text-align: center;
+  color: rgba(0, 255, 0, 0.8);
+}
+.img-producto {
+  width: 100%;
+  border-radius: 10px;
+}
+.btn-agregar-carrito {
+  width: 80%;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  background-color: rgba(0, 255, 0, 0.8);
+  cursor: pointer;
+  border: none;
+}
+.contenedor-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cantidad {
+  display: flex;
+  font-size: 1rem;
+  color: rgba(0, 255, 0, 0.8);
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-agregar-carrito:hover {
+  box-shadow: 10px 10px 50px rgba(255, 255, 255, 0.5);
+  scale: 1.1;
+}
+@media only screen and (max-width: 800px) {
+  .tarjeta-Producto {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 700px) {
+  label {
+    display: block;
+    cursor: pointer;
+  }
+
+  .menu {
+    text-align: center;
+    width: 100%;
+    display: none;
+  }
+
+  .menu a {
+    display: block;
+    border-bottom: 1px solid #eaeaeb;
+    margin: 0;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  span {
+    color: white;
+    font-weight: 900; /*2*/
+    font-size: 16px;
+  }
+  #toggle:checked + .menu {
+    /* asocia el checked al menu*/
+    display: block;
+  }
+}
+@media only screen and (max-width: 610px) {
+  section {
+    display: none;
+  }
+  .card {
+    display: none;
+  }
+}
+
+/*Tarjeta de crédito*/
+.card-h2 {
+  text-align: center;
+  font-family: "Bungee Tint", system-ui;
+}
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  padding: 30px;
+}
+.card {
+  position: relative;
+  height: 314px;
+  width: 508px;
+  transform-style: preserve-3d;
+  perspective: 500px;
+}
+.card .card1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border-radius: 5%;
+  background: rgba(225, 225, 255, 0.05);
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  transition: 1s;
+  backface-visibility: hidden;
+}
+.card:hover .card1.front {
+  transform: rotateY(180deg);
+}
+.card .card1.back {
+  transform: rotateY(180deg);
+}
+.card:hover .card1.back {
+  transform: rotateY(360deg);
+}
+.card .card1.front::before {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.card .card1.front::after {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  right: 80px;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+.card .card1.front .debit {
+  position: relative;
+  right: -10%;
+  top: 30px;
+  color: #fff;
+  font-weight: 500;
+}
+.card .card1.front .bank {
+  position: absolute;
+  right: 40px;
+  top: 25px;
+  color: #fff;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 24px;
+}
+.card .card1.front .chip {
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  max-width: 64px;
+}
+.card .card1.front .number {
+  position: absolute;
+  bottom: 130px;
+  left: 40px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 6px;
+  font-size: 18px;
+  text-shadow: 0 2px 1px #0005;
+  font-family: "Courier New", Courier, monospace;
+}
+.card .card1.front .validdate {
+  position: absolute;
+  left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  line-height: 1em;
+  text-align: right;
+  bottom: 90px;
+}
+.card .card1.front .validdate span:last-child {
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+.card .card1.front .name {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: #fff;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.card .card1.back .blackbar {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  height: 60px;
+  background-color: #000;
+}
+.card .card1.back .text {
+  position: absolute;
+  top: 120px;
+  left: 30px;
+}
+.card .card1.back .text h5 {
+  color: #fff;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.card .card1.back .text .whitebar {
+  position: relative;
+  width: 400px;
+  height: 40px;
+  background: #fff;
+  margin-top: 5px;
+}
+.card .card1.back .text .ctext {
+  position: relative;
+  top: -35px;
+  left: 395px;
+  background: #ccc;
+  color: #111;
+  width: 50px;
+  height: 30px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card .card1.back .teext {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.4em;
+  font-weight: 300;
+}
