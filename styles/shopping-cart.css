@@ -1,0 +1,189 @@
+:root {
+  --blanco: #fff;
+  --celeste-claro: #d6eaf8;
+  --azul-oscuro: #161623;
+  --verde-rana: rgba(0, 255, 0, 0.8);
+  --verde-nafta: #54d17a;
+  --gris-oscuro: rgba(255, 255, 255, 0.1);
+  --gris-claro: rgba(255, 255, 255, 0.5);
+}
+
+aside#carrito {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  height: 100vh;
+  width: 100vw;
+  max-width: 480px;
+  background-color: var(--celeste-claro);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  overflow-y: auto;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+aside#carrito > div {
+  padding: 0px 12px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+aside#carrito > .cabecera {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid;
+}
+
+aside#carrito > .cabecera > div.x {
+  font-size: x-large;
+  cursor: pointer;
+}
+
+aside#carrito > .cabecera > div.x:hover {
+  user-select: none;
+}
+
+aside#carrito > .cabecera > b {
+  font-size: xx-large;
+}
+aside#carrito > #productos-carrito {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+aside#carrito > #productos-carrito > .producto {
+  display: flex;
+  margin-bottom: 24px;
+  gap: 1px;
+}
+
+aside#carrito > #productos-carrito > .producto > .imagen {
+  width: 80px;
+  height: 80px;
+  margin-right: 8px;
+  background-image: url("https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--blanco);
+}
+
+aside#carrito > #productos-carrito > .producto > .info {
+  width: auto;
+  flex-grow: 1;
+}
+
+aside#carrito > #productos-carrito > .producto > .info > .linea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50%;
+}
+
+aside#carrito > #productos-carrito > .producto > .info > .linea > span {
+  max-width: 150px;
+  overflow: visible;
+}
+
+aside#carrito > #productos-carrito > .producto > .info > .linea > .eliminar {
+  cursor: pointer;
+  user-select: none;
+  width: 24px;
+  height: 24px;
+  background-image: url("/assets/img/delete_24dp_BLACK_FILL0_wght400_GRAD0_opsz24.svg");
+}
+
+aside#carrito > #productos-carrito > .producto > .info > .linea > .cantidad {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 126px;
+  height: 40px;
+  border: solid 1px;
+  background-color: var(--blanco);
+  color: black;
+  user-select: none;
+}
+
+aside#carrito
+  > #productos-carrito
+  > .producto
+  > .info
+  > .linea
+  > .cantidad
+  > div:nth-child(odd) {
+  cursor: pointer;
+  font-size: x-large;
+}
+aside#carrito > #productos-carrito > .producto > .info > .linea > .precios {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+aside#carrito > .footer {
+  padding: 16px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-top: 1px solid black;
+}
+
+aside#carrito > .footer > .linea {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  font-size: x-large;
+}
+
+aside#carrito > .footer > .botones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+aside#carrito > .footer > .botones > button {
+  height: 40px;
+  border: solid 2px black;
+  background-color: black;
+  color: white;
+  font-size: large;
+  cursor: pointer;
+}
+
+aside#carrito > .footer > .botones > button:hover {
+  opacity: 90%;
+}
+
+aside#carrito > .footer > .botones > button:last-child {
+  background-color: white;
+  color: black;
+}
+.opacity {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 70%;
+  z-index: 1;
+}
+
+@media (min-width: 375px) {
+  aside#carrito > #productos-carrito > .producto > .info > .linea > span {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  aside#carrito > #productos-carrito > .producto > .info > .linea > span {
+    max-width: 300px;
+  }
+}
