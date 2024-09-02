@@ -1,60 +1,65 @@
 .tarjeta-Producto {
-    width: 35%;
-    margin: 20px;
-    box-shadow: 6px 6px 50px rgba(255, 255, 255, 0.5);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
-    font-size: 1rem;
-    padding: 25px;
-  }
-  
-  .tarjeta-Producto p {
-    font-size: 15px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-align: center;
-  }
-  .tarjeta-Producto .precio {
-    text-align: left;
-  }
-  .nombre-producto {
-    text-align: center;
-    color: rgba(0, 255, 0, 0.8);
-  }
-  .img-producto {
+  width: 35%;
+  margin: 20px;
+  box-shadow: 6px 6px 50px rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  font-size: 1rem;
+  padding: 25px;
+}
+
+.tarjeta-Producto p {
+  font-size: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+.tarjeta-Producto .precio {
+  text-align: left;
+}
+.nombre-producto {
+  text-align: center;
+  color: rgba(0, 255, 0, 0.8);
+}
+.img-producto {
+  width: 100%;
+  border-radius: 10px;
+}
+.btn-agregar-carrito {
+  width: 80%;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  background-color: rgba(0, 255, 0, 0.8);
+  cursor: pointer;
+  border: none;
+}
+.contenedor-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cantidad {
+  display: flex;
+  font-size: 1rem;
+  color: rgba(0, 255, 0, 0.8);
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-agregar-carrito:hover {
+  box-shadow: 10px 10px 50px rgba(255, 255, 255, 0.5);
+  scale: 1.1;
+}
+@media only screen and (max-width: 800px) {
+  .tarjeta-Producto {
     width: 100%;
-    border-radius: 10px;
   }
-  .btn-agregar-carrito {
-    width: 80%;
-    font-size: 1.3rem;
-    border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.8);
-    cursor: pointer;
-    border: none;
-  }
-  .contenedor-cantidad {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .cantidad {
-    display: flex;
-    font-size: 1rem;
-    color: rgba(0, 255, 0, 0.8);
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .btn-agregar-carrito:hover {
-    box-shadow: 10px 10px 50px rgba(255, 255, 255, 0.5);
-    scale: 1.1;
-  }
+}

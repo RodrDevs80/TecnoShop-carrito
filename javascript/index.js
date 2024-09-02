@@ -62,7 +62,7 @@ productosArreglo.push(producto6);
 const cargarProductosEnPagina = () => {
   productosArreglo.forEach(
     (producto) =>
-      (contenedorProductos.innerHTML += `<div class="tarjeta-Producto">
+    (contenedorProductos.innerHTML += `<div class="tarjeta-Producto">
     <h4 class="nombre-producto">${producto.nombre}</h4>
     <img class="img-producto" src=${producto.imagen} alt=${producto.nombre}>
     <p>${producto.descripcion}</p>
@@ -120,14 +120,3 @@ const cargarProductosEnPagina = () => {
 
 window.onload = cargarProductosEnPagina;
 
-// document.addEventListener("click", (e)=>{
-//     const target = e.target
-//     switch (target) {
-//         case :
-
-//             break;
-
-//         default:
-//             break;
-//     }
-// })

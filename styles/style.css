@@ -8,10 +8,10 @@
   --gris-claro: rgba(255, 255, 255, 0.5);
 }
 
-.oculto{
+.oculto {
   display: none !important;
 }
-.pmz{
+.pmz {
   padding: 0px;
   margin: 0px;
 }
@@ -74,11 +74,6 @@ label {
   gap: 15px;
 }
 
-@media only screen and (max-width: 800px) {
-  .tarjeta-Producto {
-    width: 100%;
-  }
-}
 @media only screen and (max-width: 700px) {
   label {
     display: block;
@@ -117,6 +112,66 @@ label {
     display: none;
   }
 }
+/*Quienes Somos*/
+.modal-quienes-somos {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fija la posición */
+  z-index: 1; /* Asegura que esté encima de otros elementos */
+  left: 50px;
+  top: 0;
+  width: 92%;
+  height: 100%;
+  overflow: auto; /* Permite el scroll si el contenido es muy grande */
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
+}
 
+.modal-content {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 85%;
+  height: 100%;
+}
+.modal-content > article {
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 6px 6px 50px rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  font-size: 1rem;
+  padding: 25px;
+}
 
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
 
+.close:hover,
+.close:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer-strong {
+  color: #fff;
+}
+@media only screen and (max-width: 800px) {
+  .modal-quienes-somos {
+    left: 12px;
+  }
+}
