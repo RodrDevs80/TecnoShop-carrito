@@ -12,4 +12,6 @@ mostrarModal.addEventListener("click", () => {
 });
 cerrar.addEventListener("click", () => {
   myModal.style.display = "none";
+  document.body.style.overflow = "scroll";
+
 });
