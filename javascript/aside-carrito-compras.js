@@ -43,10 +43,8 @@ function crearProductoHtml(producto) {
             <div class="mas boton"  onclick="incrementarEnCarrito(${id},carrito.productos);mostrarProductosEnCarrito(carrito.productos);mostrarTotalEnCarrito(carrito)">+</div>
           </div>
           <div class="precios"><p class="pmz">$${(precio * cantidad).toFixed(
-            2
-          )}</p> <p class="pmz"><s>$${(precio * cantidad).toFixed(
     2
-  )}</s></p></div>
+  )}</p></s></p></div>
         </div>
   `;
 
@@ -65,7 +63,7 @@ function mostrarProductosEnCarrito(productosCarrito) {
 
 function mostrarTotalEnCarrito(carrito) {
   const hTotalCarrito = document.getElementById("total-carrito");
-  hTotalCarrito.textContent = carrito.calcularTotal().toFixed(2);
+  hTotalCarrito.textContent = `$${carrito.calcularTotal().toFixed(2)}`;
 }
 
 function substraerEnCarrito(id, productosCarrito) {
