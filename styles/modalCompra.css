@@ -13,6 +13,8 @@
   opacity: 1;
   pointer-events: unset;
   z-index: 3;
+  margin: 0px;
+  overflow: scroll;
 }
 .modal-container {
   margin: auto;
