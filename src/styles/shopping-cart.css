@@ -94,7 +94,7 @@ aside#carrito > #productos-carrito > .producto > .info > .linea > .eliminar {
   user-select: none;
   width: 24px;
   height: 24px;
-  background-image: url("/assets/img/delete_24dp_BLACK_FILL0_wght400_GRAD0_opsz24.svg");
+  background-image: url("../assets/img/delete_24dp_BLACK_FILL0_wght400_GRAD0_opsz24.svg");
 }
 
 aside#carrito > #productos-carrito > .producto > .info > .linea > .cantidad {
