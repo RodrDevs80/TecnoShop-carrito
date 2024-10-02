@@ -11,7 +11,6 @@ const principal = {
       const hNombre = document.createElement("h4");
       const hImagen = document.createElement("img");
       const hDescripcion = document.createElement("p");
-      //const hCantidad = document.createElement("div");
       const hPrecio = document.createElement("h4");
       const btnAgregarAlCarrito = document.createElement("button");
 
@@ -27,8 +26,6 @@ const principal = {
       hImagen.classList.add("img-producto");
 
       hDescripcion.textContent = descripcion;
-      //hCantidad.classList.add("contenedor-cantidad");
-      /* hCantidad.innerHTML = `<label for="cant" class="cantidad" >Cantidad</label><select id="cant" class="cantidad" name="cantidad" ><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>`; */
       hPrecio.classList.add("precio");
       hPrecio.textContent = `$${precio} Dolares`;
 
@@ -45,10 +42,8 @@ const principal = {
       hCardProducto.appendChild(hNombre);
       hCardProducto.appendChild(hImagen);
       hCardProducto.appendChild(hDescripcion);
-      //hCardProducto.appendChild(hCantidad);
       hCardProducto.appendChild(hPrecio);
       hCardProducto.appendChild(btnAgregarAlCarrito);
-
       htmlContenedor.appendChild(hCardProducto);
     });
   },
