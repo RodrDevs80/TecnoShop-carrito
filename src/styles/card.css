@@ -21,8 +21,9 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
 }
-.tarjeta-Producto .precio {
-  text-align: left;
+.precio {
+  color: #ffffff;
+  font-weight: 400;
 }
 .nombre-producto {
   text-align: center;
@@ -33,12 +34,14 @@
   border-radius: 10px;
 }
 .btn-agregar-carrito {
-  width: 80%;
+  width: 60%;
   font-size: 1.3rem;
   border-radius: 10px;
   background-color: rgba(0, 255, 0, 0.8);
   cursor: pointer;
   border: none;
+  color: #ffffff;
+  padding: 10px 4px;
 }
 .contenedor-cantidad {
   display: flex;
