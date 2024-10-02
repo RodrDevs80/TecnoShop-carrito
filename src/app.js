@@ -99,6 +99,11 @@ function cargarProductosPaginaPrincipal(
   });
 }
 
+document.addEventListener("click", (e) => {
+  asideMenu.controlCarrito(e, carrito.productos);
+});
+
+
 window.onload = cargarProductosPaginaPrincipal(
   "contenedor-productos",
   productos,
