@@ -77,7 +77,7 @@ function cargarProductosPaginaPrincipal(
     hDescripcion.textContent = descripcion;
     //hCantidad.classList.add("contenedor-cantidad");
     /* hCantidad.innerHTML = `<label for="cant" class="cantidad" >Cantidad</label><select id="cant" class="cantidad" name="cantidad" ><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>`; */
-    hPrecio.classList.add('precio');
+    hPrecio.classList.add("precio");
     hPrecio.textContent = `$${precio} Dolares`;
 
     btnAgregarAlCarrito.id = `add${id}`;
@@ -102,9 +102,8 @@ function cargarProductosPaginaPrincipal(
 }
 
 document.addEventListener("click", (e) => {
-  asideMenu.controlCarrito(e, carrito.productos);
+  controlCarrito(e, carrito);
 });
-
 
 window.onload = cargarProductosPaginaPrincipal(
   "contenedor-productos",
