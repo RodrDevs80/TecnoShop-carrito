@@ -50,7 +50,7 @@ const producto6 = new Producto(
 
 const contenedorProductos = document.getElementById("contenedor-productos");
 const compras = document.getElementById("compras");
-let indiceId = 0;
+let indiceId = 1;
 const productosArreglo = [];
 productosArreglo.push(producto1);
 productosArreglo.push(producto2);
@@ -59,64 +59,60 @@ productosArreglo.push(producto4);
 productosArreglo.push(producto5);
 productosArreglo.push(producto6);
 
-const cargarProductosEnPagina = () => {
-  productosArreglo.forEach(
-    (producto) =>
-    (contenedorProductos.innerHTML += `<div class="tarjeta-Producto">
-    <h4 class="nombre-producto">${producto.nombre}</h4>
-    <img class="img-producto" src=${producto.imagen} alt=${producto.nombre}>
-    <p>${producto.descripcion}</p>
-    <div class="contenedor-cantidad">
-    <label class="cantidad">Cantidad</label>
-        <select class="cantidad" name="cantidad" id=${indiceId++}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-    </div>
-    <h2 class="precio">💲${producto.precio} Dolares</h2>
-    <button class="btn-agregar-carrito" id="btn-agregar-carrito">Agregar al Carrito ➕🛒</button>
-    </div>`)
-  );
-  const botonesAgregarCarrito = document.querySelectorAll(
-    "#btn-agregar-carrito"
-  );
-  if (botonesAgregarCarrito) {
-    botonesAgregarCarrito.forEach((btn) =>
-      btn.addEventListener("click", (e) => {
-        compras.textContent =
-          Number(compras.textContent) +
-          Number(e.target.parentNode.children[3].children[1].value);
-        //depuración
-        /* console.log(e.target.parentNode.children[0].textContent);
-            console.log(e.target.parentNode.children[1].src);
-            console.log(e.target.parentNode.children[2].textContent);
-            console.log(Number(e.target.parentNode.children[3].children[1].value));
-            console.log(Number(e.target.parentNode.children[4].textContent.split(' ')[0].split("💲")[1])); */
-        carrito.agregarProducto(
-          new Producto(
-            e.target.parentNode.children[0].textContent,
-            Number(
-              e.target.parentNode.children[4].textContent
-                .split(" ")[0]
-                .split("💲")[1]
-            ),
-            e.target.parentNode.children[2].textContent,
-            e.target.parentNode.children[1].src,
-            "electronica",
-            Number(e.target.parentNode.children[3].children[1].value)
-          )
-        );
-        console.log(carrito.productos);
-      })
-    );
-  }
-};
+function cargarProductosPaginaPrincipal(
+  idContenedorHtml,
+  arrayProductos,
+  carritoDeCompras
+) {
+  const htmlContenedor = document.getElementById(idContenedorHtml);
+  arrayProductos.forEach((producto) => {
+    const { id, nombre, imagen, descripcion, precio, categoria } = producto;
+    const hCardProducto = document.createElement("artcle");
+    const hNombre = document.createElement("h4");
+    const hImagen = document.createElement("img");
+    const hDescripcion = document.createElement("p");
+    const hCantidad = document.createElement("div");
+    const hPrecio = document.createElement("p");
+    const btnAgregarAlCarrito = document.createElement("button");
+    
+    hCardProducto.classList.add("tarjeta-Producto");
+    // pvp -> producto vista principal
+    hCardProducto.id = `pvp${id}`;
 
+    hNombre.textContent = nombre;
+    hNombre.classList.add("nombre-producto");
 
+    hImagen.src = imagen;
+    hImagen.alt = nombre;
 
+    hDescripcion.textContent = descripcion;
+    hCantidad.classList.add("contenedor-cantidad");
+    hCantidad.innerHTML = `<label class="cantidad">Cantidad</label><select class="cantidad" name="cantidad" id=${indiceId++}><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>`;
 
-window.onload = cargarProductosEnPagina;
+    hPrecio.textContent = `$${precio} Dolares`;
 
+    btnAgregarAlCarrito.id = `add${id}`;
+    btnAgregarAlCarrito.classList.add("btn-agregar-carrito");
+    const manejarAgregarAlCarrito = () => {
+      carritoDeCompras.agregarProducto(
+        new Producto(nombre, precio, descripcion, imagen, categoria, 1, id)
+      );
+    };
+    btnAgregarAlCarrito.addEventListener("click", manejarAgregarAlCarrito);
+
+    hCardProducto.appendChild(hNombre);
+    hCardProducto.appendChild(hImagen);
+    hCardProducto.appendChild(hDescripcion);
+    hCardProducto.appendChild(hCantidad);
+    hCardProducto.appendChild(hPrecio);
+    hCardProducto.appendChild(btnAgregarAlCarrito);
+
+    htmlContenedor.appendChild(hCardProducto);
+  });
+}
+
+window.onload = cargarProductosPaginaPrincipal(
+  "contenedor-productos",
+  productosArreglo,
+  carrito
+);
