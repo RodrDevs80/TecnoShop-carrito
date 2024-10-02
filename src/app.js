@@ -77,7 +77,7 @@ function cargarProductosPaginaPrincipal(
     hDescripcion.textContent = descripcion;
     //hCantidad.classList.add("contenedor-cantidad");
     /* hCantidad.innerHTML = `<label for="cant" class="cantidad" >Cantidad</label><select id="cant" class="cantidad" name="cantidad" ><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>`; */
-    hPrecio.classList.add("precio");
+    hPrecio.classList.add('precio');
     hPrecio.textContent = `$${precio} Dolares`;
 
     btnAgregarAlCarrito.id = `add${id}`;
@@ -99,6 +99,35 @@ function cargarProductosPaginaPrincipal(
 
     htmlContenedor.appendChild(hCardProducto);
   });
+}
+function controlCarrito(e, carrito) {
+  if (e.target.classList.contains("btn-agregar-carrito")) {
+    asideMenu.mostrarProductosEnCarrito(carrito);
+    asideMenu.mostrarTotalEnCarrito(carrito);
+    asideMenu.open();
+  } else {
+    switch (e.target.id) {
+      case "carrito-compras":
+        asideMenu.mostrarProductosEnCarrito(carrito);
+        asideMenu.mostrarTotalEnCarrito(carrito);
+        asideMenu.open();
+        break;
+      case "cerrar-carrito":
+        asideMenu.close();
+        break;
+
+      case `opacity`:
+        asideMenu.close();
+        break;
+
+      case "ver-mas-productos":
+        asideMenu.close();
+
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 document.addEventListener("click", (e) => {

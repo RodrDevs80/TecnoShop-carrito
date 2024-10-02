@@ -87,32 +87,3 @@ const asideMenu = {
     }
   },
 };
-function controlCarrito(e, carrito) {
-  if (e.target.classList.contains("btn-agregar-carrito")) {
-    asideMenu.mostrarProductosEnCarrito(carrito);
-    asideMenu.mostrarTotalEnCarrito(carrito);
-    asideMenu.open();
-  } else {
-    switch (e.target.id) {
-      case "carrito-compras":
-        asideMenu.mostrarProductosEnCarrito(carrito);
-        asideMenu.mostrarTotalEnCarrito(carrito);
-        asideMenu.open();
-        break;
-      case "cerrar-carrito":
-        asideMenu.close();
-        break;
-
-      case `opacity`:
-        asideMenu.close();
-        break;
-
-      case "ver-mas-productos":
-        asideMenu.close();
-
-        break;
-      default:
-        break;
-    }
-  }
-}
