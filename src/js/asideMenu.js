@@ -1,10 +1,10 @@
 const asideMenu = {
-  mostrarCarrito() {
+  open() {
     document.getElementById("carrito").classList.remove("oculto");
     document.getElementById("opacity").classList.remove("oculto");
     document.body.style.overflow = "hidden";
   },
-  ocultarCarrito() {
+  close() {
     document.getElementById("carrito").classList.add("oculto");
     document.getElementById("opacity").classList.add("oculto");
     document.body.style.overflow = "auto";
@@ -91,24 +91,24 @@ function controlCarrito(e, carrito) {
   if (e.target.classList.contains("btn-agregar-carrito")) {
     asideMenu.mostrarProductosEnCarrito(carrito);
     asideMenu.mostrarTotalEnCarrito(carrito);
-    asideMenu.mostrarCarrito();
+    asideMenu.open();
   } else {
     switch (e.target.id) {
       case "carrito-compras":
         asideMenu.mostrarProductosEnCarrito(carrito);
         asideMenu.mostrarTotalEnCarrito(carrito);
-        asideMenu.mostrarCarrito();
+        asideMenu.open();
         break;
       case "cerrar-carrito":
-        asideMenu.ocultarCarrito();
+        asideMenu.close();
         break;
 
       case `opacity`:
-        asideMenu.ocultarCarrito();
+        asideMenu.close();
         break;
 
       case "ver-mas-productos":
-        asideMenu.ocultarCarrito();
+        asideMenu.close();
 
         break;
       default:
