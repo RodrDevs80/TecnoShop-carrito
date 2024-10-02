@@ -1,175 +1,196 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="styles/card.css" />
+    <link rel="stylesheet" type="text/css" href="styles/shopping-cart.css" />
+    <link rel="stylesheet" type="text/css" href="styles/credit-card.css" />
+    <link rel="stylesheet" href="./styles/modalCompra.css" />
+    <link rel="icon" href="./assets/img/carrito.svg" />
+    <link rel="stylesheet" href="./styles/shopping-cart.css" />
+    <script
+      src="https://kit.fontawesome.com/ca5ef2b8ee.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>TecnoShop</title>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="styles/style.css" />
-  <link rel="stylesheet" type="text/css" href="styles/card.css" />
-  <link rel="stylesheet" type="text/css" href="styles/shopping-cart.css" />
-  <link rel="stylesheet" type="text/css" href="styles/credit-card.css" />
-  <link rel="stylesheet" href="./styles/modalCompra.css">
-  <link rel="icon" href="./assets/img/carrito.svg" />
-  <link rel="stylesheet" href="./styles/shopping-cart.css" />
-  <script src="https://kit.fontawesome.com/ca5ef2b8ee.js" crossorigin="anonymous"></script>
-  <title>TecnoShop</title>
-</head>
-
-<body>
-  <div class="nav">
-    <h1 class="titulo">TecnoShop</h1>
-    <label for="toggle" style="color: rgba(0, 255, 0, 0.8)">&#9776;</label>
-    <input type="checkbox" id="toggle" />
-    <div class="menu">
-      <a id="mostrar-modal">Quienes Somos</>
+  <body>
+    <div class="nav">
+      <h1 class="titulo">TecnoShop</h1>
+      <label for="toggle" style="color: rgba(0, 255, 0, 0.8)">&#9776;</label>
+      <input type="checkbox" id="toggle" />
+      <div class="menu">
+        <a id="mostrar-modal">Quienes Somos</a>
         <a href="./index.html">Productos</a>
-        <a href="#"><span><img id="carrito-compras" src="./assets/img/carrito.svg" alt="carrito" width="30px" /><samp
-              class="compras" id="compras" style="color: rgba(0, 255, 0, 0.8) ;">0</a>
+        <a href="#"
+          ><img
+            id="carrito-compras"
+            src="./assets/img/carrito.svg"
+            alt="carrito"
+            width="30px"
+          />
+          <span class="compras" id="compras" style="color: rgba(0, 255, 0, 0.8)"
+            >0</span
+          >
+        </a>
+      </div>
     </div>
-  </div>
-  <aside id="carrito" class="oculto">
-    <div class="cabecera">
-      <b>Mi carrito</b>
-      <div class="cerrar-carrito x" id="cerrar-carrito">X</div>
-    </div>
-    <div id="productos-carrito">
-      <div class="producto">
-        <div class="imagen"></div>
-        <div class="info">
-          <div class="linea">
-            <span class="nombre">Disco Duro Externo Portátil WD 2TB Elements - USB 3.0</span>
-            <div class="eliminar"></div>
-          </div>
-          <div class="linea">
-            <div class="cantidad">
-              <div class="menos boton" onclick="">-</div>
-              <div class="cantidad-actual">5</div>
-              <div class="mas boton" onclick="">+</div>
+    <aside id="carrito" class="oculto">
+      <div class="cabecera">
+        <b>Mi carrito</b>
+        <div class="cerrar-carrito x" id="cerrar-carrito">X</div>
+      </div>
+      <div id="productos-carrito">
+        <div class="producto">
+          <div class="imagen"></div>
+          <div class="info">
+            <div class="linea">
+              <span class="nombre"
+                >Disco Duro Externo Portátil WD 2TB Elements - USB 3.0</span
+              >
+              <div class="eliminar"></div>
             </div>
-            <div class="precios">
-              <span>$500</span> <span><s>$700</s></span>
+            <div class="linea">
+              <div class="cantidad">
+                <div class="menos boton" onclick="">-</div>
+                <div class="cantidad-actual">5</div>
+                <div class="mas boton" onclick="">+</div>
+              </div>
+              <div class="precios">
+                <span>$500</span> <span><s>$700</s></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="subtotal-carrito"></div>
-    <div id="medio-envio"></div>
-    <div class="footer">
-      <div class="linea">
-        <b>Total</b>
-        <b id="total-carrito">$5.000.00</b>
-      </div>
-      <div class="botones">
-        <button id="realizar-compra">Realizar compra</button>
-        <button class="cerrar-carrito" id="ver-mas-productos">
-          Ver mas productos
-        </button>
-      </div>
-    </div>
-  </aside>
-  <div class="opacity oculto" id="opacity"></div>
-  <main class="contenedor-productos" id="contenedor-productos"></main>
-  <h2 class="card-h2">Recibimos todas las tarjetas de crédito y débito</h2>
-  <section>
-    <div class="card">
-      <div class="card1 front">
-        <h3 class="debit">Debit Card</h3>
-        <h3 class="bank">Bank Name</h3>
-        <img class="chip" src="./assets/img/pixlr-bg-result.png" />
-        <h3 class="number">0123 4567 8901 2345</h3>
-        <h5 class="validdate">
-          <span>valid <br />till</span> <span>10/36</span>
-        </h5>
-        <h5 class="name">Bad💀Design</h5>
-      </div>
-      <div class="card1 back">
-        <div class="blackbar"></div>
-        <div class="text">
-          <h5>Authorized Signature not valid unless signed</h5>
-          <div class="whitebar"></div>
-          <div class="ctext">123</div>
+      <div id="subtotal-carrito"></div>
+      <div id="medio-envio"></div>
+      <div class="footer">
+        <div class="linea">
+          <b>Total</b>
+          <b id="total-carrito">$5.000.00</b>
         </div>
-        <p class="teext">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-          iste totam facere deleniti sunt.Harum, odit esse quo temporibus quos
-          dolore nisi ullam adipisci omnis.
-        </p>
+        <div class="botones">
+          <button id="realizar-compra">Realizar compra</button>
+          <button class="cerrar-carrito" id="ver-mas-productos">
+            Ver mas productos
+          </button>
+        </div>
+      </div>
+    </aside>
+    <div class="opacity oculto" id="opacity"></div>
+    <main class="contenedor-productos" id="contenedor-productos"></main>
+    <h2 class="card-h2">Recibimos todas las tarjetas de crédito y débito</h2>
+    <section>
+      <div class="card">
+        <div class="card1 front">
+          <h3 class="debit">Debit Card</h3>
+          <h3 class="bank">Bank Name</h3>
+          <img class="chip" src="./assets/img/pixlr-bg-result.png" />
+          <h3 class="number">0123 4567 8901 2345</h3>
+          <h5 class="validdate">
+            <span>valid <br />till</span> <span>10/36</span>
+          </h5>
+          <h5 class="name">Bad💀Design</h5>
+        </div>
+        <div class="card1 back">
+          <div class="blackbar"></div>
+          <div class="text">
+            <h5>Authorized Signature not valid unless signed</h5>
+            <div class="whitebar"></div>
+            <div class="ctext">123</div>
+          </div>
+          <p class="teext">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+            iste totam facere deleniti sunt.Harum, odit esse quo temporibus quos
+            dolore nisi ullam adipisci omnis.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="modal">
+      <div class="modal-container">
+        <h2 class="modal-titulo">Gracias por comprar en TecnoShop</h2>
+        <p class="modal-parrafo">¡Su compra fue realizada con exito!</p>
+        <a href="#" class="cerrar-modal" id="cerrar-modal">volver</a>
+      </div>
+    </section>
+    <!--Quienes Somos-->
+    <div class="modal-quienes-somos" id="myModal">
+      <div class="modal-content">
+        <span class="close" id="cerrar">&times;</span>
+        <article>
+          <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Carlos Rodríguez</h4>
+          <img style="width: 200px" src="./assets/img/carlos.jpg" alt="" />
+          <p style="color: rgba(0, 255, 0, 0.8); text-align: justify">
+            Un excelente programador web, que inspira a otros. Su entusiasmo
+            contagioso y su paciencia al explicar conceptos complejos hacen que
+            aprender a programar sea una experiencia mucho más agradable.
+            ¡Gracias, Carlos, por compartir tus conocimientos con la comunidad!
+          </p>
+        </article>
+
+        <article>
+          <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Alvaro Ojeda</h4>
+          <img style="width: 200px" src="./assets/img/alvaro.png" alt="" />
+          <p style="color: rgba(0, 255, 0, 0.8); text-align: justify">
+            Con un talento innato para la programación web, Su capacidad para
+            escribir código profundo y, al mismo tiempo, simplificado es
+            admirable. Su perseverancia lo lleva a encontrar soluciones
+            eficientes a problemas complejos, convirtiéndolo en un programador
+            muy prometedor.
+          </p>
+        </article>
+
+        <article>
+          <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Paul Isaurrualde</h4>
+          <img style="width: 200px" src="./assets/img/paul.jpg" alt="" />
+          <p style="color: rgba(0, 255, 0, 0.8); text-align: justify">
+            De una dedicación admirable. Su constancia lo ha llevado a dominar
+            rápidamente nuevas tecnologías y lenguajes. Su creatividad se
+            manifiesta en la creación de interfaces de usuario intuitivas y en
+            la implementación de soluciones eficientes. Además, su habilidad
+            para escribir c ódigo limpio y optimizado garantiza un rendimiento
+            excepcional de las aplicaciones que desarrolla.
+          </p>
+        </article>
+
+        <article>
+          <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Cristian Anders</h4>
+          <img style="width: 200px" src="./assets/img/cristian.png" alt="" />
+          <p style="color: rgba(0, 255, 0, 0.8); text-align: justify">
+            Estudiante de programación web con una gran actitud. Destaca por su
+            buen humor, lo que crea un ambiente de trabajo agradable. Además,
+            demuestra excelentes habilidades para la inserción y el trabajo en
+            equipo, siendo un colaborador valioso en cualquier proyecto. Su
+            experiencia en el desarrollo de aplicaciones de escritorio demuestra
+            su versatilidad y capacidad para abordar diferentes desafíos
+            tecnológicos .
+          </p>
+        </article>
+        <footer>
+          <p>
+            <strong class="footer-strong"
+              >© Copyright 2024-Bad&#128128;design</strong
+            >
+          </p>
+        </footer>
       </div>
     </div>
-  </section>
-  <section class="modal">
-    <div class="modal-container">
-      <h2 class="modal-titulo">
-        Gracias por comprar en TecnoShop
-      </h2>
-      <p class="modal-parrafo">
-        ¡Su compra fue realizada con exito!
-      </p>
-      <a href="#" class="cerrar-modal" id="cerrar-modal">volver</a>
-    </div>
-  </section>
-  <!--Quienes Somos-->
-  <div class="modal-quienes-somos" id="myModal">
-    <div class="modal-content">
-      <span class="close" id="cerrar">&times;</span>
-      <article>
-        <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Carlos Rodríguez</h4>
-        <img style="width: 200px;" src="./assets/img/carlos.jpg" alt="">
-        <p style="color: rgba(0, 255, 0, 0.8);text-align: justify;">
-          Un excelente programador web, que inspira a otros. Su entusiasmo contagioso
-          y su paciencia al explicar conceptos complejos hacen que aprender a programar
-          sea una experiencia mucho más agradable. ¡Gracias, Carlos, por compartir tus
-          conocimientos con la comunidad!</p>
-      </article>
-
-      <article>
-        <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Alvaro Ojeda</h4>
-        <img style="width: 200px;" src="./assets/img/alvaro.png" alt="">
-        <p style="color: rgba(0, 255, 0, 0.8);text-align: justify;">
-          Con un talento innato para la programación web,
-          Su capacidad para escribir código profundo y, al mismo tiempo, simplificado es admirable.
-          Su perseverancia lo lleva a encontrar soluciones eficientes a problemas complejos,
-          convirtiéndolo en un programador muy prometedor.</p>
-      </article>
-
-      <article>
-        <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Paul Isaurrualde</h4>
-        <img style="width: 200px;" src="./assets/img/paul.jpg" alt="">
-        <p style="color: rgba(0, 255, 0, 0.8);text-align: justify;">
-          De una dedicación admirable. Su constancia lo ha llevado a dominar rápidamente nuevas tecnologías y lenguajes.
-          Su creatividad se manifiesta en la creación de interfaces de usuario intuitivas
-          y en la implementación de soluciones eficientes. Además, su habilidad para escribir c
-          ódigo limpio y optimizado garantiza un rendimiento excepcional de las aplicaciones que desarrolla.</p>
-      </article>
-
-      <article>
-        <h4 style="color: rgba(0, 255, 0, 0.8)" ;>Cristian Anders</h4>
-        <img style="width: 200px;" src="./assets/img/cristian.png" alt="">
-        <p style="color: rgba(0, 255, 0, 0.8);text-align: justify;">
-          Estudiante de programación web con una gran actitud. Destaca por su buen humor,
-          lo que crea un ambiente de trabajo agradable. Además, demuestra excelentes habilidades para la inserción
-          y el trabajo en equipo, siendo un colaborador valioso en cualquier proyecto.
-          Su experiencia en el desarrollo de aplicaciones de escritorio demuestra su versatilidad y
-          capacidad para abordar diferentes desafíos tecnológicos .</p>
-      </article>
-      <footer>
-        <p><strong class="footer-strong">© Copyright 2024-Bad&#128128;design</strong></p>
-      </footer>
-    </div>
-
-    </>
     <script src="./javascript/compra.js"></script>
     <script src="./javascript/modal-quienes-somos.js"></script>
     <script src="./javascript/classes.js"></script>
-    <script src="./javascript/index.js"></script>
+    <script src="./javascript/app.js"></script>
     <script src="./javascript/aside-carrito-compras.js"></script>
-</body>
-
+  </body>
 </html>
