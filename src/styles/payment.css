@@ -8,21 +8,21 @@
 }
 
 #payment-loading-skeleton {
+  filter: invert(34%) sepia(86%) saturate(6781%) hue-rotate(267deg)
+    brightness(97%) contrast(115%);
   animation: loading 0.3s ease-in-out 0s 3 normal forwards;
 }
 
 #payment {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   left: 0px;
   top: 0px;
-  background-color: red;
   width: 100vw;
   height: 100vh;
   z-index: 4;
-  overflow: scroll;
 }
 
 #payment > #choose-delivery-method > * {
