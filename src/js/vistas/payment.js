@@ -7,6 +7,9 @@ const payment = {
     function setBackgroundOpacity() {
       const opacity = document.createElement("div");
       opacity.style.zIndex = 3;
+      opacity.style.position = "absolute";
+      opacity.style.left = "0px";
+      opacity.style.bottom = "0px";
       opacity.classList.add("opacity");
       opacity.id = "opacity-payment";
       document.body.appendChild(opacity);
@@ -36,5 +39,18 @@ const payment = {
     }
     removeModal();
   },
-//   loadingSkeleton() {},
+  loadingSkeleton() {
+    const loading = document.createElement("img");
+    loading.src = "src/assets/img/loading.svg";
+    loading.style.width = "100px"
+    loading.style.height = "100px"
+    loading.style.zIndex = "5"
+    loading.id = "payment-loading-skeleton"
+    function removeLoading(){
+        document.getElementById("payment-loading-skeleton").remove()
+    }
+    setTimeout(removeLoading,1000)
+
+    document.getElementById("payment").appendChild(loading);
+  },
 };

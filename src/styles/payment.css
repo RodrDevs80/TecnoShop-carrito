@@ -1,7 +1,24 @@
-#payment{
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#payment-loading-skeleton {
+  animation: loading 0.3s ease-in-out 0s 3 normal forwards;
+}
+
+#payment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   position: absolute;
   left: 0px;
   top: 0px;
+  background-color: red;
   width: 100vw;
   height: 100vh;
   z-index: 4;
@@ -14,4 +31,3 @@
   justify-content: center;
   gap: 40px;
 }
-
