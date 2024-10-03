@@ -12,22 +12,33 @@
     brightness(97%) contrast(115%);
   animation: loading 0.3s ease-in-out 0s 3 normal forwards;
 }
-
+#opacity-payment {
+  z-index: 3;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  background-color: black;
+  opacity: 80%;
+  width: 100vw;
+  height: 100vh;
+}
 #payment {
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: absolute;
+	align-items: center;
+  position: fixed;
   left: 0px;
   top: 0px;
   width: 100vw;
   height: 100vh;
   z-index: 4;
+  overflow-y: scroll;
 }
 
-#payment > #choose-delivery-method > * {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 40px;
+#payment > *:not(#payment-loading-skeleton ){
+	display: flex;
+	flex-direction: column;
+	background-color: aliceblue;
+	gap: 20px;
+	padding: 20px;
 }
