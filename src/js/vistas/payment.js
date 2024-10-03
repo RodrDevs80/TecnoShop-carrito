@@ -69,4 +69,9 @@ const payment = {
     const payment = document.getElementById("payment");
     payment.appendChild(formChooseDeliveryMethod());
   },
+  test() {
+    this.open();
+    this.loadingSkeleton();
+    setTimeout(this.openChooseDeliveryMethod, 1000);
+  },
 };
