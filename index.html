@@ -14,6 +14,8 @@
   <link rel="stylesheet" type="text/css" href="src/styles/card.css" />
   <link rel="stylesheet" type="text/css" href="src/styles/shopping-cart.css" />
   <link rel="stylesheet" type="text/css" href="src/styles/credit-card.css" />
+  <link rel="stylesheet" href="src/styles/slider-footer.css">
+  <link rel="stylesheet" href="src/styles/slider-header.css">
   <link rel="stylesheet" href="./src/styles/modalCompra.css" />
   <link rel="icon" href="./src/assets/img/carrito.svg" />
   <link rel="stylesheet" href="./src/styles/shopping-cart.css" />
@@ -22,18 +24,49 @@
 </head>
 
 <body>
-  <div class="nav">
+  <div class="nav-sup">Envíos gratis a partir de los 💲500 Dolares.-<img src="./src/assets/img/envio.png" alt=""
+      srcset=""></div>
+  <nav class="nav">
     <h1 class="titulo">TecnoShop</h1>
-    <label for="toggle" style="color: rgba(0, 255, 0, 0.8)">&#9776;</label>
+    <label for="toggle" style="color: #16C60C">&#9776;</label>
     <input type="checkbox" id="toggle" />
     <div class="menu">
       <a id="mostrar-modal">Quienes Somos</a>
       <a href="./index.html">Productos</a>
       <a href="#"><img id="carrito-compras" src="./src/assets/img/carrito.svg" alt="carrito" width="30px" />
-
       </a>
     </div>
+  </nav>
+  <!--slider header-->
+  <div class="slider-h">
+    <div class="slide-track-h">
+      <div class="slide-h">
+        <img src="./src/assets/img/6_10-08-2023-11-08-42-kingston-microglobal-1600x340_3.jpg" alt="lenovo">
+      </div>
+      <div class="slide-h">
+        <img src="./src/assets/img/6_17-11-2022-12-11-23-wd-slide.jpg" alt="WD">
+      </div>
+      <div class="slide-h">
+        <img src="./src/assets/img/6_17-11-2022-12-11-49-slide-hpe-pc.jpg" alt="HP">
+      </div>
+      <div class="slide-h">
+        <img src="./src/assets/img/6_29-04-2024-12-04-10-0001005809055bannerweb-skyhawk-1920x500.jpg" alt="seagate">
+      </div>
+      <div class="slide-h">
+        <img src="./src/assets/img/6_10-08-2023-11-08-42-kingston-microglobal-1600x340_3.jpg" alt="lenovo">
+      </div>
+      <div class="slide-h">
+        <img src="./src/assets/img/6_17-11-2022-12-11-23-wd-slide.jpg" alt="WD">
+      </div>
+      <div class="slide-h">
+        <img src="./src/assets/img/6_17-11-2022-12-11-49-slide-hpe-pc.jpg" alt="HP">
+      </div>
+      <div class="slide-h">
+        <img src="./src/assets/img/6_29-04-2024-12-04-10-0001005809055bannerweb-skyhawk-1920x500.jpg" alt="seagate">
+      </div>
+    </div>
   </div>
+  <!---->
   <aside id="carrito" class="oculto">
     <div class="cabecera">
       <b>Mi carrito</b>
@@ -76,7 +109,9 @@
     </div>
   </aside>
   <div class="opacity oculto" id="opacity"></div>
+  <!--Contenedor de Productos-->
   <main class="contenedor-productos" id="contenedor-productos"></main>
+  <!--fin de contenedor de productos-->
   <h2 class="card-h2">Recibimos todas las tarjetas de crédito y débito</h2>
   <section>
     <div class="card">
@@ -170,6 +205,88 @@
           <strong class="footer-strong">© Copyright 2024-Bad&#128128;design</strong>
         </p>
       </footer>
+    </div>
+  </div>
+  <div class="slider">
+    <div class="slide-track">
+      <div class="slide">
+        <img src="./src/assets/img/xpg.jpg" alt="logo xpg">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/asus.jpg" alt="logo asus">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/d-link.jpg" alt="logo d-link">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/cisco.jpg" alt="logo cisco">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/gigabyte.jpg" alt="logo gigabyte">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/intel.jpg" alt="logo intel">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/msi.jpg" alt="logo msi">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/seagate.jpg" alt="logo seagate">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/toshiba.jpg" alt="logo toshiba">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/logitech.jpg" alt="logo logitech">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/adata.jpg" alt="logo adata">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/western-digital.jpg" alt="logo wd">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/skullcandy.jpg" alt="logo skullcandy">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/xpg.jpg" alt="logo xpg">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/asus.jpg" alt="logo asus">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/d-link.jpg" alt="logo d-link">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/cisco.jpg" alt="logo cisco">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/gigabyte.jpg" alt="logo gigabyte">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/intel.jpg" alt="logo intel">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/msi.jpg" alt="logo msi">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/seagate.jpg" alt="logo seagate">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/toshiba.jpg" alt="logo toshiba">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/logitech.jpg" alt="logo logitech">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/adata.jpg" alt="logo adata">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/western-digital.jpg" alt="logo wd">
+      </div>
+      <div class="slide">
+        <img src="./src/assets/img/skullcandy.jpg" alt="logo skullcandy">
+      </div>
     </div>
   </div>
   <script src="./src/js/classes.js"></script>
