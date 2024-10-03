@@ -1,0 +1,17 @@
+#payment{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
+  overflow: scroll;
+}
+
+#payment > #choose-delivery-method > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+
