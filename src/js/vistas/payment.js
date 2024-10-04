@@ -152,7 +152,6 @@ const payment = {
       form.id = "formEnterPaymentMethodInformation";
       form.innerHTML = `
                    <h2>Ingresa la Informacion de tu Tarjeta</h2>
-  <form action="/submit-payment" method="post">
     <!-- Número de tarjeta -->
     <label for="card-number">Numero de Tarjeta:</label>
     <input type="text" id="card-number" name="card-number" maxlength="16" placeholder="1234 5678 9012 3456" required />
@@ -186,36 +185,89 @@ const payment = {
     const payment = document.getElementById("payment");
     payment.appendChild(formEnterPaymentMethodInformation());
   },
+  openSelectCreditCardInstallments() {
+    function formEnterPaymentMethodInformation() {
+      const form = document.createElement("form");
+      form.id = "formEnterPaymentMethodInformation";
+      form.innerHTML = `  <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+  <div>
+    <p>Mastercard **** 3564</p>
+    <label>
+      <input type="radio" name="installments" value="1" />
+      1x $ 65.699
+    </label>
+    <br />
+    <label>
+      <input type="radio" name="installments" value="2" />
+      2x $ 34.626
+    </label>
+    <br />
+    <label>
+      <input type="radio" name="installments" value="3" />
+      3x $ 23.489
+    </label>
+    <br />
+    <label>
+      <input type="radio" name="installments" value="6" />
+      6x $ 12.474
+    </label>
+    <br />
+    <label>
+      <input type="radio" name="installments" value="9" />
+      9x $ 8.978
+    </label>
+    <br />
+    <label>
+      <input type="radio" name="installments" value="12" />
+      12x $ 7.296
+    </label>
+    <br />
+  </div>
+    <input type="submit" value="Continuar">
+    <button type="submit">Cancelar</button>
+ `;
+      return form;
+    }
+    const payment = document.getElementById("payment");
+    payment.appendChild(formEnterPaymentMethodInformation());
+  },
   test(view, delay) {
     switch (view) {
       case 1:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openChooseDeliveryMethod, delay);
-        setTimeout(this.close, delay * 4);
+        setTimeout(this.close, delay * 10);
         break;
       case 2:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openHomeDelivery, delay);
-        setTimeout(this.close, delay * 4);
+        setTimeout(this.close, delay * 10);
         break;
       case 3:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openConfirmHomeDelivery, delay);
-        setTimeout(this.close, delay * 4);
+        setTimeout(this.close, delay * 10);
         break;
       case 4:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openPaymentMethod, delay);
-        setTimeout(this.close, delay * 4);
+        setTimeout(this.close, delay * 10);
         break;
       case 5:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openEnterPaymentMethodInformation, delay);
+        setTimeout(this.close, delay * 10);
+        break;
+      case 6:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openSelectCreditCardInstallments, delay);
+        setTimeout(this.close, delay * 10);
         break;
       default:
         break;
