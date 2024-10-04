@@ -234,7 +234,7 @@ const payment = {
   openConfirmPurchase() {
     function formConfirmPurchase() {
       const form = document.createElement("form");
-      form.id = "formEnterPaymentMethodInformation";
+      form.id = "formConfirmPurchase";
       form.innerHTML = ` 
     <div>
       <h2>Detalle de Envio</h2>
@@ -267,6 +267,22 @@ const payment = {
     }
     const payment = document.getElementById("payment");
     payment.appendChild(formConfirmPurchase());
+  },
+  openThankYou() {
+    function thankYouModal() {
+      const modal = document.createElement("form");
+      modal.id = "thankYou";
+      modal.innerHTML = `
+      <div class="modal-container">
+        <h2 class="modal-titulo">Gracias por comprar en TecnoShop</h2>
+        <p class="modal-parrafo">¡Su compra fue realizada con exito!</p>
+        <a href="#" class="cerrar-modal" id="close-thankyou">volver</a>
+      </div>
+      `;
+      return modal;
+    }
+    const payment = document.getElementById("payment");
+    payment.appendChild(thankYouModal());
   },
   test(view, delay) {
     switch (view) {
@@ -310,6 +326,12 @@ const payment = {
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openConfirmPurchase, delay);
+        setTimeout(this.close, delay * 10);
+        break;
+      case 8:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openThankYou, delay);
         setTimeout(this.close, delay * 10);
         break;
       default:
