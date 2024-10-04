@@ -146,6 +146,46 @@ const payment = {
     const payment = document.getElementById("payment");
     payment.appendChild(formPaymentMethod());
   },
+  openEnterPaymentMethodInformation() {
+    function formEnterPaymentMethodInformation() {
+      const form = document.createElement("form");
+      form.id = "formEnterPaymentMethodInformation";
+      form.innerHTML = `
+                   <h2>Ingresa la Informacion de tu Tarjeta</h2>
+  <form action="/submit-payment" method="post">
+    <!-- Número de tarjeta -->
+    <label for="card-number">Numero de Tarjeta:</label>
+    <input type="text" id="card-number" name="card-number" maxlength="16" placeholder="1234 5678 9012 3456" required />
+    <br />
+
+    <!-- Nombre y apellido -->
+    <label for="card-name">Nombre Completo del Titular:</label>
+    <input type="text" id="card-name" name="card-name" placeholder="Nombre Completo" required />
+    <br />
+
+    <!-- Fecha de vencimiento -->
+    <label for="expiry-date">Fecha de Vencimiento:</label>
+    <input type="month" id="expiry-date" name="expiry-date" required />
+    <br />
+
+    <!-- Código de seguridad -->
+    <label for="security-code">Codigo de Seguridad (CVV):</label>
+    <input type="text" id="security-code" name="security-code" maxlength="3" placeholder="123" required />
+    <br />
+
+    <!-- DNI del titular -->
+    <label for="dni">DNI del Titular:</label>
+    <input type="text" id="dni" name="dni" placeholder="Ingresa numero de DNI" required />
+    <br />
+
+    <input type="submit" value="Continuar">
+    <button type="submit">Cancelar</button>
+      `;
+      return form;
+    }
+    const payment = document.getElementById("payment");
+    payment.appendChild(formEnterPaymentMethodInformation());
+  },
   test(view, delay) {
     switch (view) {
       case 1:
@@ -166,11 +206,16 @@ const payment = {
         setTimeout(this.openConfirmHomeDelivery, delay);
         setTimeout(this.close, delay * 4);
         break;
-      case 3:
+      case 4:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openPaymentMethod, delay);
         setTimeout(this.close, delay * 4);
+        break;
+      case 5:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openEnterPaymentMethodInformation, delay);
         break;
       default:
         break;
