@@ -69,9 +69,61 @@ const payment = {
     const payment = document.getElementById("payment");
     payment.appendChild(formChooseDeliveryMethod());
   },
-  test() {
-    this.open();
-    this.loadingSkeleton();
-    setTimeout(this.openChooseDeliveryMethod, 1000);
+  openHomeDelivery() {
+    function formHomeDelivery() {
+      const form = document.createElement("form");
+      form.id = "formHomeDelivery";
+      form.innerHTML = `
+              <label for="nombre_apellido">Nombre
+ y apellido (tal cual figura en el DNI):</label>
+        <input type="text" id="nombre_apellido" name="nombre_apellido" required>
+
+        <label for="codigo_postal">Código postal:</label>
+        <input type="text" id="codigo_postal" name="codigo_postal" required>
+
+        <label for="provincia">Provincia:</label> 
+        <input type="text" id="provincia" name="provincia" required>
+
+        <label for="localidad">Localidad/Barrio:</label>
+        <input type="text" id="localidad" name="localidad" required>
+
+        <label for="calle">Calle/Avenida:</label>
+        <input type="text" id="calle" name="calle" required>
+
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" required>
+
+        <label for="telefono">Teléfono
+ de contacto:</label>
+        <input type="tel" id="telefono" name="telefono" required>
+
+        <label for="indicaciones">Indicaciones adicionales (opcional):</label>
+        <textarea id="indicaciones" name="indicaciones"></textarea>
+
+        <input type="submit" value="Enviar">
+        <button type="submit">Cancelar</button>
+      `;
+      return form;
+    }
+    const payment = document.getElementById("payment");
+    payment.appendChild(formHomeDelivery());
+  },
+  test(view, delay) {
+    switch (view) {
+      case 1:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openChooseDeliveryMethod, delay);
+        setTimeout(this.close, delay*4);
+        break;
+      case 2:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openHomeDelivery, delay);
+        setTimeout(this.close, delay*4);
+        break;
+      default:
+        break;
+    }
   },
 };
