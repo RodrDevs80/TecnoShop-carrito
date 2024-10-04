@@ -231,6 +231,43 @@ const payment = {
     const payment = document.getElementById("payment");
     payment.appendChild(formEnterPaymentMethodInformation());
   },
+  openConfirmPurchase() {
+    function formConfirmPurchase() {
+      const form = document.createElement("form");
+      form.id = "formEnterPaymentMethodInformation";
+      form.innerHTML = ` 
+    <div>
+      <h2>Detalle de Envio</h2>
+      <p><strong>Nombre:</strong> Juan Perez</p>
+      <p><strong>Direccion:</strong> san martin 1234, cordoba</p>
+      <p><strong>Ciudad:</strong> cordoba</p>
+      <p><strong>Codigo Postal:</strong> 12345</p>
+    </div>
+
+    <div>
+      <h2>Detalle de pago</h2>
+      <p><strong>Metodo de pago:</strong> Mastercard **** 3564</p>
+      <p><strong>cuotas:</strong> 3x $ 23.489</p>
+    </div>
+
+    <div>
+    <h2>Resumen de compra</h2>
+      <div>
+        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
+        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
+        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
+      </div>
+      <p>Total: $12345.67</p>
+    </div>
+
+    <input type="submit" value="Confirmar Compra">
+    <button type="submit">Cancelar</button>
+ `;
+      return form;
+    }
+    const payment = document.getElementById("payment");
+    payment.appendChild(formConfirmPurchase());
+  },
   test(view, delay) {
     switch (view) {
       case 1:
@@ -267,6 +304,12 @@ const payment = {
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openSelectCreditCardInstallments, delay);
+        setTimeout(this.close, delay * 10);
+        break;
+      case 7:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openConfirmPurchase, delay);
         setTimeout(this.close, delay * 10);
         break;
       default:
