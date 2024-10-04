@@ -19,7 +19,7 @@ aside#carrito {
   color: black;
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 12;
   overflow-y: auto;
   margin: 0px;
   padding: 0px;

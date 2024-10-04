@@ -25,12 +25,19 @@
 </head>
 
 <body>
-  <div class="nav-sup">Envíos gratis a partir de los 💲500 Dolares.-<img src="./src/assets/img/envio.png" alt=""
-      srcset=""></div>
+  <div class="nav-sup">Envíos gratis a partir de los 💲500 Dolares.-<img src="./src/assets/img/envio.png"
+      alt="envio gratis" srcset=""></div>
   <nav class="nav">
     <h1 class="titulo">TecnoShop</h1>
     <div class="search-container">
-      <input type="text" class="search-input" id="buscar" placeholder="Buscar producto..." />
+      <div class="input-container">
+        <input required="" id="search_input" placeholder="Buscar Producto..." type="text">
+        <button id="btn-buscar" class="btn-buscar" type="button">
+          Buscar
+        </button>
+      </div>
+    </div>
+    <div class="contenedor-busqueda" id="contenedor-busqueda">
     </div>
     <label id="icono-menu" for="toggle" style="color: #16C60C">&#9776;</label>
     <input type="checkbox" id="toggle" />
@@ -299,6 +306,7 @@
   <script src="./src/js/vistas/principal.js"></script>
   <script src="./src/js/vistas/asideMenu.js"></script>
   <script src="./src/app.js"></script>
+  <script src="./src/js/busqueda.js"></script>
 </body>
 
 </html>

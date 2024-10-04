@@ -2,10 +2,10 @@ const carrito = new Carrito();
 
 const productos = [
   new Producto(
-    "Disco Duro Externo Portátil WD 2TB Elements - USB 3.0",
+    "Procesador Intel Core i9-14900",
     64,
-    "Compatibilidad con USB 3.0 y USB 2.0 Transferencias rápidas de datos Mejora el rendimiento del PC Gran capacidad",
-    "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+    "Intel Core I9 I9-14900 - 2 Ghz - 24 Núcleos - 32 Hilos - 36 Mb Caché - Fclga1700 Socket - Caja",
+    "https://microglobalpromos.com.ar/2024/img/082024/BX8071514900_01.jpg",
     "electrónica"
   ),
 
@@ -25,14 +25,14 @@ const productos = [
     "electrónica"
   ),
   new Producto(
-    "Unidad de Estado Sólido Interna WD Blue 3D NAND SATA SSD de 1TB",
+    "Disco Solido Interno Kingston 250GB NV2 PCIE NVME M2",
     140,
-    "Alto rendimiento y gran capacidad para aplicaciones intensivas de múltiples tareas y videojuegos.",
-    "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
+    "Kingston Nv2 - Ssd - 250 Gb - Interno - M.2 2280 - Pcie 4.0 X4 (nvme) - Para Intel Next Unit Of Computing 12 Pro Kit - Nuc12wski5",
+    "https://microglobalpromos.com.ar/2022/img/092022/SNV2S-250G_3.jpg",
     "electrónica"
   ),
   new Producto(
-    "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
+    "Monitor Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
     500,
     "Pantalla IPS panorámica Full HD (1920 x 1080) de 21, 5 pulgadas y tecnología de sincronización gratuita Radeon",
     "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
@@ -80,6 +80,7 @@ function controlVistaPrincipal(
   );
 }
 
+
 function controlCarrito(e, carrito) {
   if (e.target.classList.contains("btn-agregar-carrito")) {
     asideMenu.mostrarProductosEnCarrito(carrito);
@@ -119,3 +120,7 @@ window.onload = controlVistaPrincipal(
   productos,
   carrito
 );
+
+
+
+
