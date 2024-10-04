@@ -108,6 +108,23 @@ const payment = {
     const payment = document.getElementById("payment");
     payment.appendChild(formHomeDelivery());
   },
+  openConfirmHomeDelivery() {
+    function formConfirmHomeDelivery() {
+      const form = document.createElement("form");
+      form.id = "formConfirmHomeDelivery";
+      form.innerHTML = `
+    <h2>Confirmar direccion de envio</h2>
+    <div class="shipping-info">
+      <p><strong>Fecha estimada de llegada:</strong> Octubre 10, 2024</p>
+      <p><strong>Direccion de envio:</strong> san martin 123, cordoba</p>
+    </div>
+    <input type="submit" value="Continuar">
+    <button type="submit">Cancelar</button>`;
+      return form;
+    }
+    const payment = document.getElementById("payment");
+    payment.appendChild(formConfirmHomeDelivery());
+  },
   openPaymentMethod() {
     function formPaymentMethod() {
       const form = document.createElement("form");
@@ -141,6 +158,12 @@ const payment = {
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openHomeDelivery, delay);
+        setTimeout(this.close, delay * 4);
+        break;
+      case 3:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openConfirmHomeDelivery, delay);
         setTimeout(this.close, delay * 4);
         break;
       case 3:
