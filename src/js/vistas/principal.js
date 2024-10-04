@@ -13,8 +13,12 @@ const principal = {
       const hDescripcion = document.createElement("p");
       const hPrecio = document.createElement("h4");
       const btnAgregarAlCarrito = document.createElement("button");
-
+      /* HTML: <div class="ribbon">Your text content</div> */
+      const div = document.createElement("div");
+      div.classList.add("ribbon");
+      div.textContent = "Producto Premium";
       hCardProducto.classList.add("tarjeta-Producto");
+      hCardProducto.classList.add("shadow");
       // pvp -> producto vista principal
       hCardProducto.id = `pvp${id}`;
 
@@ -38,9 +42,9 @@ const principal = {
         );
       };
       btnAgregarAlCarrito.addEventListener("click", manejarAgregarAlCarrito);
-
-      hCardProducto.appendChild(hNombre);
+      hCardProducto.appendChild(div);
       hCardProducto.appendChild(hImagen);
+      hCardProducto.appendChild(hNombre);
       hCardProducto.appendChild(hDescripcion);
       hCardProducto.appendChild(hPrecio);
       hCardProducto.appendChild(btnAgregarAlCarrito);

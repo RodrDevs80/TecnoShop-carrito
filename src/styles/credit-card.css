@@ -30,6 +30,7 @@ section {
   transform-style: preserve-3d;
   transition: 1s;
   backface-visibility: hidden;
+  background-color: blue;
 }
 .card:hover .card1.front {
   transform: rotateY(180deg);
