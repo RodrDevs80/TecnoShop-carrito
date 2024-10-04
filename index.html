@@ -16,6 +16,7 @@
   <link rel="stylesheet" type="text/css" href="src/styles/credit-card.css" />
   <link rel="stylesheet" href="src/styles/slider-footer.css">
   <link rel="stylesheet" href="src/styles/slider-header.css">
+  <link rel="stylesheet" href="src/styles/style-buscar.css">
   <link rel="stylesheet" href="./src/styles/modalCompra.css" />
   <link rel="icon" href="./src/assets/img/carrito.svg" />
   <link rel="stylesheet" href="./src/styles/shopping-cart.css" />
@@ -28,7 +29,10 @@
       srcset=""></div>
   <nav class="nav">
     <h1 class="titulo">TecnoShop</h1>
-    <label for="toggle" style="color: #16C60C">&#9776;</label>
+    <div class="search-container">
+      <input type="text" class="search-input" id="buscar" placeholder="Buscar producto..." />
+    </div>
+    <label id="icono-menu" for="toggle" style="color: #16C60C">&#9776;</label>
     <input type="checkbox" id="toggle" />
     <div class="menu">
       <a id="mostrar-modal">Quienes Somos</a>

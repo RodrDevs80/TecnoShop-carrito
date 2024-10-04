@@ -59,10 +59,8 @@ body {
   cursor: pointer;
   color: #12722c;
 }
-span {
-  color: #54d17a;
-}
-label {
+
+#icono-menu {
   margin: 0 40px 0 0; /*margin: 10px 3px 30px 5px; 10px arriba, 3px derecha, 30px abajo, 5px izquierda */
   font-size: 26px;
   line-height: 70px;
@@ -81,7 +79,7 @@ label {
   margin-bottom: 0;
 }
 .contenedor-productos {
-  margin: 80px 10px;
+  margin: 0px 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -100,7 +98,7 @@ label {
   }
 }
 @media only screen and (max-width: 700px) {
-  label {
+  #icono-menu {
     display: block;
     cursor: pointer;
   }
@@ -119,11 +117,7 @@ label {
     font-weight: bold;
     font-size: 16px;
   }
-  span {
-    color: white;
-    font-weight: 900; /*2*/
-    font-size: 16px;
-  }
+
   #toggle:checked + .menu {
     /* asocia el checked al menu*/
     display: block;
