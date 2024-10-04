@@ -108,19 +108,46 @@ const payment = {
     const payment = document.getElementById("payment");
     payment.appendChild(formHomeDelivery());
   },
+  openPaymentMethod() {
+    function formPaymentMethod() {
+      const form = document.createElement("form");
+      form.id = "formPaymentMethod";
+      form.innerHTML = `
+                  <h2>Selecciona tu método de pago:</h2>
+    <label>
+        <input type="radio" name="metodo_pago" value="credito"> Tarjeta de crédito
+    </label>
+    <label>
+        <input type="radio" name="metodo_pago" value="debito"> Tarjeta de débito
+    </label>
+    <input type="submit" value="Continuar">
+    <button type="submit">Cancelar</button>
+
+      `;
+      return form;
+    }
+    const payment = document.getElementById("payment");
+    payment.appendChild(formPaymentMethod());
+  },
   test(view, delay) {
     switch (view) {
       case 1:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openChooseDeliveryMethod, delay);
-        setTimeout(this.close, delay*4);
+        setTimeout(this.close, delay * 4);
         break;
       case 2:
         this.open();
         this.loadingSkeleton();
         setTimeout(this.openHomeDelivery, delay);
-        setTimeout(this.close, delay*4);
+        setTimeout(this.close, delay * 4);
+        break;
+      case 3:
+        this.open();
+        this.loadingSkeleton();
+        setTimeout(this.openPaymentMethod, delay);
+        setTimeout(this.close, delay * 4);
         break;
       default:
         break;
