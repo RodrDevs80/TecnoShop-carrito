@@ -48,34 +48,40 @@ const payment = {
     document.getElementById("payment").appendChild(loading);
   },
   openChooseDeliveryMethod() {
-    function formChooseDeliveryMethod() {
-      const form = document.createElement("form");
-      form.id = "formChooseDeliveryMethod";
-      form.innerHTML = `
+    const form = document.createElement("form");
+    const modal = document.getElementById("payment");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formChooseDeliveryMethod";
+    form.innerHTML = `
       <h2>Selecciona tu método de entrega:</h2>
         <label>
             <input type="radio" name="opcion_envio" value="domicilio"> Enviar a domicilio
         </label>
         <label>
-            <input type="radio" name="opcion_envio" value="punto_entrega"> Retirar en punto de entrega
-        </label>
-        <label>
-            <input type="radio" name="opcion_envio" value="domicilio_vendedor"> Retirar en el domicilio del vendedor
+            <input type="radio" name="opcion_envio" value="punto_entrega"> Retirar en el local
         </label>
         <input type="submit" value="Continuar">
-        <button type="submit">Cancelar</button>`;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formChooseDeliveryMethod());
+        `;
+    form.appendChild(closeBtn);
+    modal.appendChild(form);
   },
   openHomeDelivery() {
-    function formHomeDelivery() {
-      const form = document.createElement("form");
-      form.id = "formHomeDelivery";
-      form.innerHTML = `
-              <label for="nombre_apellido">Nombre
- y apellido (tal cual figura en el DNI):</label>
+    const form = document.createElement("form");
+    const modal = document.getElementById("payment");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formHomeDelivery";
+    form.innerHTML = `
+              <label for="nombre_apellido">Nombre y apellido (tal cual figura en el DNI):</label>
         <input type="text" id="nombre_apellido" name="nombre_apellido" required>
 
         <label for="codigo_postal">Código postal:</label>
@@ -93,43 +99,48 @@ const payment = {
         <label for="numero">Número:</label>
         <input type="text" id="numero" name="numero" required>
 
-        <label for="telefono">Teléfono
- de contacto:</label>
+        <label for="telefono">Teléfono de contacto:</label>
         <input type="tel" id="telefono" name="telefono" required>
 
         <label for="indicaciones">Indicaciones adicionales (opcional):</label>
         <textarea id="indicaciones" name="indicaciones"></textarea>
 
         <input type="submit" value="Enviar">
-        <button type="submit">Cancelar</button>
       `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formHomeDelivery());
+    form.appendChild(closeBtn);
+    modal.appendChild(form);
   },
   openConfirmHomeDelivery() {
-    function formConfirmHomeDelivery() {
-      const form = document.createElement("form");
-      form.id = "formConfirmHomeDelivery";
-      form.innerHTML = `
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formConfirmHomeDelivery";
+    form.innerHTML = `
     <h2>Confirmar direccion de envio</h2>
     <div class="shipping-info">
       <p><strong>Fecha estimada de llegada:</strong> Octubre 10, 2024</p>
       <p><strong>Direccion de envio:</strong> san martin 123, cordoba</p>
     </div>
-    <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>`;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formConfirmHomeDelivery());
+    <input type="submit" value="Continuar">`;
+    form.appendChild(closeBtn);
+    modal.appendChild(form);
   },
   openPaymentMethod() {
-    function formPaymentMethod() {
-      const form = document.createElement("form");
-      form.id = "formPaymentMethod";
-      form.innerHTML = `
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formPaymentMethod";
+    form.innerHTML = `
                   <h2>Selecciona tu método de pago:</h2>
     <label>
         <input type="radio" name="metodo_pago" value="credito"> Tarjeta de crédito
@@ -138,19 +149,22 @@ const payment = {
         <input type="radio" name="metodo_pago" value="debito"> Tarjeta de débito
     </label>
     <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>
-
       `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formPaymentMethod());
+
+    modal.appendChild(form);
+    form.appendChild(closeBtn);
   },
   openEnterPaymentMethodInformation() {
-    function formEnterPaymentMethodInformation() {
-      const form = document.createElement("form");
-      form.id = "formEnterPaymentMethodInformation";
-      form.innerHTML = `
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formEnterPaymentMethodInformation";
+    form.innerHTML = `
                    <h2>Ingresa la Informacion de tu Tarjeta</h2>
     <!-- Número de tarjeta -->
     <label for="card-number">Numero de Tarjeta:</label>
@@ -178,18 +192,21 @@ const payment = {
     <br />
 
     <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>
       `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formEnterPaymentMethodInformation());
+    form.appendChild(closeBtn);
+    modal.appendChild(form);
   },
   openSelectCreditCardInstallments() {
-    function formEnterPaymentMethodInformation() {
-      const form = document.createElement("form");
-      form.id = "formEnterPaymentMethodInformation";
-      form.innerHTML = `  <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formEnterPaymentMethodInformation";
+    form.innerHTML = `  <h2>Seleccioná las cuotas de tarjeta de credito</h2>
   <div>
     <p>Mastercard **** 3564</p>
     <label>
@@ -224,18 +241,21 @@ const payment = {
     <br />
   </div>
     <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>
  `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formEnterPaymentMethodInformation());
+    form.appendChild(closeBtn);
+    modal.appendChild(form);
   },
   openConfirmPurchase() {
-    function formConfirmPurchase() {
-      const form = document.createElement("form");
-      form.id = "formConfirmPurchase";
-      form.innerHTML = ` 
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formConfirmPurchase";
+    form.innerHTML = ` 
     <div>
       <h2>Detalle de Envio</h2>
       <p><strong>Nombre:</strong> Juan Perez</p>
@@ -261,81 +281,67 @@ const payment = {
     </div>
 
     <input type="submit" value="Confirmar Compra">
-    <button type="submit">Cancelar</button>
  `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formConfirmPurchase());
+    form.appendChild(closeBtn);
+    modal.appendChild(form);
   },
   openThankYou() {
-    function thankYouModal() {
-      const modal = document.createElement("form");
-      modal.id = "thankYou";
-      modal.innerHTML = `
-      <div class="modal-container">
-        <h2 class="modal-titulo">Gracias por comprar en TecnoShop</h2>
-        <p class="modal-parrafo">¡Su compra fue realizada con exito!</p>
-        <a href="#" class="cerrar-modal" id="close-thankyou">volver</a>
-      </div>
+    const ty = document.createElement("section");
+    const modal = document.getElementById("payment");
+    const closeBtn = document.createElement("a");
+    closeBtn.textContent = "Volver";
+    closeBtn.classList.add("cerrar-modal");
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      ty.remove();
+      this.close();
+    });
+    ty.id = "thankYou";
+    ty.innerHTML = `
+            <div class="modal-container">
+      <h2 class="modal-titulo">Gracias por comprar en TecnoShop</h2>
+      <p class="modal-parrafo">¡Su compra fue realizada con exito!</p>
+    </div>
       `;
-      return modal;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(thankYouModal());
+    modal.appendChild(ty);
+    document.querySelector("#thankYou > div").appendChild(closeBtn);
   },
-  test(view, delay) {
+  test(view) {
     switch (view) {
       case 1:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openChooseDeliveryMethod, delay);
-        setTimeout(this.close, delay * 10);
+        this.openChooseDeliveryMethod();
         break;
       case 2:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openHomeDelivery, delay);
-        setTimeout(this.close, delay * 10);
+        this.openHomeDelivery();
         break;
       case 3:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openConfirmHomeDelivery, delay);
-        setTimeout(this.close, delay * 10);
+        this.openConfirmHomeDelivery();
         break;
       case 4:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openPaymentMethod, delay);
-        setTimeout(this.close, delay * 10);
+        this.openPaymentMethod();
         break;
       case 5:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openEnterPaymentMethodInformation, delay);
-        setTimeout(this.close, delay * 10);
+        this.openEnterPaymentMethodInformation();
         break;
       case 6:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openSelectCreditCardInstallments, delay);
-        setTimeout(this.close, delay * 10);
+        this.openSelectCreditCardInstallments();
         break;
       case 7:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openConfirmPurchase, delay);
-        setTimeout(this.close, delay * 10);
+        this.openConfirmPurchase();
         break;
       case 8:
         this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openThankYou, delay);
-        setTimeout(this.close, delay * 10);
+        this.openThankYou();
         break;
       default:
         break;
     }
-  },
+  }
 };
