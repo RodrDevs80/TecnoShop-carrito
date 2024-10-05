@@ -343,5 +343,56 @@ const payment = {
       default:
         break;
     }
-  }
+  },
+  data: {
+    deliveryMethod: {
+      delivery: false,
+      local: false,
+    },
+    homeDeliveryInfo: {
+      fullName: null,
+      postalCode: null,
+      province: null,
+      neighborhood: null,
+      street: null,
+      number: null,
+      contactPhone: null,
+      indications: null,
+    },
+    paymentMethod: {
+      creditCard: false,
+      debitCard: false,
+    },
+    cardInfo: {
+      type: null,
+      Installments: null,
+      number: null,
+      name: null,
+      securityCode: null,
+      expiryDate: null,
+      dni: null,
+    },
+    getDeliveryMethod() {
+      if (this.deliveryMethod.delivery) {
+        return "delivery";
+      }
+      if (this.deliveryMethod.delivery) {
+        return "local";
+      }
+    },
+    gethomeDeliveryInfo() {
+      return this.homeDeliveryInfo();
+    },
+    getPaymentMethod() {
+      if (this.paymentMethod.creditCard) {
+        return "creditCard";
+      }
+      if (this.paymentMethod.debitCard) {
+        return "debitCard";
+      }
+    },
+    getCardInfo() {
+      return this.cardInfo;
+    },
+  },
 };
