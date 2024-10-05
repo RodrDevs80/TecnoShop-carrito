@@ -3,7 +3,7 @@ const carrito = new Carrito();
 const productos = [
   new Producto(
     "Procesador Intel Core i9-14900",
-    64,
+    640,
     "Intel Core I9 I9-14900 - 2 Ghz - 24 Núcleos - 32 Hilos - 36 Mb Caché - Fclga1700 Socket - Caja",
     "https://microglobalpromos.com.ar/2024/img/082024/BX8071514900_01.jpg",
     "electrónica"
