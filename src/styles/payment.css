@@ -35,7 +35,7 @@
   overflow-y: scroll;
 }
 
-#payment > *:not(#payment-loading-skeleton ){
+#payment > *:not(#payment-loading-skeleton, #thankYou){
 	display: flex;
 	flex-direction: column;
 	background-color: aliceblue;
