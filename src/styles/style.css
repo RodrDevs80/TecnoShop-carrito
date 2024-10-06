@@ -53,7 +53,7 @@ body {
   text-decoration: none;
   color: gray;
   margin: 0 10px;
-  line-height: 52px; /*alinear icono*/
+  line-height: 70px; /*alinear icono*/
   vertical-align: top; /*alinear icono*/
 }
 .menu a:hover {
@@ -84,11 +84,8 @@ body {
   width: 15%;
   border-radius: 50%;
 }
-#carrito-compras {
-  border-radius: 50%;
-}
+
 #carrito-compras:hover {
-  border: 1px solid red;
   scale: 0.9;
 }
 .contenedor-productos {
