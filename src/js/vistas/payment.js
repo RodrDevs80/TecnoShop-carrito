@@ -482,7 +482,7 @@ const payment = {
       this.data.deliveryMethod == "domicilio"
         ? `    <div>
       <h2>Detalle de Envio</h2>
-      <p><strong>Nombre:</strong> ${this.data.homeDeliveryInfo.name}</p>
+      <p><strong>Nombre:</strong> ${this.data.homeDeliveryInfo.fullName}</p>
       <p><strong>Direccion:</strong> ${this.data.homeDeliveryInfo.street} ${this.data.homeDeliveryInfo.number}</p>
       <p><strong>Ciudad:</strong> ${this.data.homeDeliveryInfo.city}, ${this.data.homeDeliveryInfo.province}</p>
       <p><strong>Codigo Postal:</strong> ${this.data.homeDeliveryInfo.postalCode}</p>
