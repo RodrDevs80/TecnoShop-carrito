@@ -111,8 +111,8 @@ const payment = {
         <label for="province">Provincia:</label> 
         <input type="text" id="province" name="province" required>
 
-        <label for="neighborhood">Localidad/Barrio:</label>
-        <input type="text" id="neighborhood" name="neighborhood" required>
+        <label for="city">Localidad/Barrio:</label>
+        <input type="text" id="city" name="city" required>
 
         <label for="street">Calle/Avenida:</label>
         <input type="text" id="street" name="street" required>
@@ -135,7 +135,7 @@ const payment = {
         fullName,
         postalCode,
         province,
-        neighborhood,
+        city,
         street,
         number,
         contactPhone,
@@ -145,7 +145,7 @@ const payment = {
         fullName.value &&
         postalCode.value &&
         province.value &&
-        neighborhood.value &&
+        city.value &&
         street.value &&
         number.value &&
         contactPhone.value
@@ -153,20 +153,46 @@ const payment = {
         this.data.homeDeliveryInfo.fullName = fullName.value;
         this.data.homeDeliveryInfo.postalCode = postalCode.value;
         this.data.homeDeliveryInfo.province = province.value;
-        this.data.homeDeliveryInfo.neighborhood = neighborhood.value;
+        this.data.homeDeliveryInfo.city = city.value;
         this.data.homeDeliveryInfo.street = street.value;
         this.data.homeDeliveryInfo.number = number.value;
         this.data.homeDeliveryInfo.contactPhone = contactPhone.value;
         this.data.homeDeliveryInfo.indications = indications.value;
-        console.log(this.data.gethomeDeliveryInfo());
-        form.remove()
+        // console.log(this.data.gethomeDeliveryInfo());
+        form.remove();
         this.openConfirmHomeDelivery();
-        
       }
     });
     modal.appendChild(form);
   },
   openConfirmHomeDelivery() {
+    function obtenerFechaFormateada(diasSumar = 4) {
+      const fecha = new Date();
+      fecha.setDate(fecha.getDate() + diasSumar);
+      const meses = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
+      const nombreMes = meses[fecha.getMonth()];
+      const dia = fecha.getDate();
+      const anio = fecha.getFullYear();
+      return `${nombreMes} ${dia}, ${anio}`;
+    }
+    function obtenerDireccionFormateada(data) {
+      const { city, street, number } = data;
+      return `${street} ${number}, ${city}`;
+    }
+
     this.view = 3;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
@@ -180,8 +206,8 @@ const payment = {
     form.innerHTML = `
     <h2>Confirmar direccion de envio</h2>
     <div class="shipping-info">
-      <p><strong>Fecha estimada de llegada:</strong> Octubre 10, 2024</p>
-      <p><strong>Direccion de envio:</strong> san martin 123, cordoba</p>
+      <p><strong>Fecha estimada de llegada:</strong> ${obtenerFechaFormateada()}</p>
+      <p><strong>Direccion de envio:</strong> ${obtenerDireccionFormateada(this.data.homeDeliveryInfo)}</p>
     </div>
     <input type="submit" value="Continuar">`;
     form.appendChild(closeBtn);
@@ -412,7 +438,7 @@ const payment = {
       fullName: null,
       postalCode: null,
       province: null,
-      neighborhood: null,
+      city: null,
       street: null,
       number: null,
       contactPhone: null,
