@@ -48,88 +48,187 @@ const payment = {
     document.getElementById("payment").appendChild(loading);
   },
   openChooseDeliveryMethod() {
-    function formChooseDeliveryMethod() {
-      const form = document.createElement("form");
-      form.id = "formChooseDeliveryMethod";
-      form.innerHTML = `
+    const form = document.createElement("form");
+    const modal = document.getElementById("payment");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formChooseDeliveryMethod";
+    form.innerHTML = `
       <h2>Selecciona tu método de entrega:</h2>
         <label>
             <input type="radio" name="opcion_envio" value="domicilio"> Enviar a domicilio
         </label>
         <label>
-            <input type="radio" name="opcion_envio" value="punto_entrega"> Retirar en punto de entrega
-        </label>
-        <label>
-            <input type="radio" name="opcion_envio" value="domicilio_vendedor"> Retirar en el domicilio del vendedor
+            <input type="radio" name="opcion_envio" value="punto_entrega"> Retirar en el local
         </label>
         <input type="submit" value="Continuar">
-        <button type="submit">Cancelar</button>`;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formChooseDeliveryMethod());
+        `;
+    form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const { opcion_envio } = form.elements;
+      opcion_envio.forEach((radio) => {
+        if (radio.checked) {
+          this.data.deliveryMethod = radio.value;
+        }
+      });
+      switch (this.data.deliveryMethod) {
+        case "domicilio":
+          modal.innerHTML = "";
+          this.openHomeDelivery();
+          break;
+        case "punto_entrega":
+          modal.innerHTML = "";
+          this.openPaymentMethod();
+          break;
+        default:
+          break;
+      }
+    });
+    modal.appendChild(form);
   },
   openHomeDelivery() {
-    function formHomeDelivery() {
-      const form = document.createElement("form");
-      form.id = "formHomeDelivery";
-      form.innerHTML = `
-              <label for="nombre_apellido">Nombre
- y apellido (tal cual figura en el DNI):</label>
-        <input type="text" id="nombre_apellido" name="nombre_apellido" required>
+    const form = document.createElement("form");
+    const modal = document.getElementById("payment");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formHomeDelivery";
+    form.innerHTML = `
+              <label for="fullName">Nombre y apellido (tal cual figura en el DNI):</label>
+        <input type="text" id="fullName" name="fullName" required>
 
-        <label for="codigo_postal">Código postal:</label>
-        <input type="text" id="codigo_postal" name="codigo_postal" required>
+        <label for="postalCode">Código postal:</label>
+        <input type="text" id="postalCode" name="postalCode" required>
 
-        <label for="provincia">Provincia:</label> 
-        <input type="text" id="provincia" name="provincia" required>
+        <label for="province">Provincia:</label> 
+        <input type="text" id="province" name="province" required>
 
-        <label for="localidad">Localidad/Barrio:</label>
-        <input type="text" id="localidad" name="localidad" required>
+        <label for="city">Localidad/Barrio:</label>
+        <input type="text" id="city" name="city" required>
 
-        <label for="calle">Calle/Avenida:</label>
-        <input type="text" id="calle" name="calle" required>
+        <label for="street">Calle/Avenida:</label>
+        <input type="text" id="street" name="street" required>
 
-        <label for="numero">Número:</label>
-        <input type="text" id="numero" name="numero" required>
+        <label for="number">Número:</label>
+        <input type="text" id="number" name="number" required>
 
-        <label for="telefono">Teléfono
- de contacto:</label>
-        <input type="tel" id="telefono" name="telefono" required>
+        <label for="contactPhone">Teléfono de contacto:</label>
+        <input type="tel" id="contactPhone" name="contactPhone" required>
 
-        <label for="indicaciones">Indicaciones adicionales (opcional):</label>
-        <textarea id="indicaciones" name="indicaciones"></textarea>
+        <label for="indications">Indicaciones adicionales (opcional):</label>
+        <textarea id="indications" name="indications"></textarea>
 
         <input type="submit" value="Enviar">
-        <button type="submit">Cancelar</button>
       `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formHomeDelivery());
+    form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const {
+        fullName,
+        postalCode,
+        province,
+        city,
+        street,
+        number,
+        contactPhone,
+        indications,
+      } = form.elements;
+      if (
+        fullName.value &&
+        postalCode.value &&
+        province.value &&
+        city.value &&
+        street.value &&
+        number.value &&
+        contactPhone.value
+      ) {
+        this.data.homeDeliveryInfo.fullName = fullName.value;
+        this.data.homeDeliveryInfo.postalCode = postalCode.value;
+        this.data.homeDeliveryInfo.province = province.value;
+        this.data.homeDeliveryInfo.city = city.value;
+        this.data.homeDeliveryInfo.street = street.value;
+        this.data.homeDeliveryInfo.number = number.value;
+        this.data.homeDeliveryInfo.contactPhone = contactPhone.value;
+        this.data.homeDeliveryInfo.indications = indications.value;
+        form.remove();
+        this.openConfirmHomeDelivery();
+      }
+    });
+    modal.appendChild(form);
   },
   openConfirmHomeDelivery() {
-    function formConfirmHomeDelivery() {
-      const form = document.createElement("form");
-      form.id = "formConfirmHomeDelivery";
-      form.innerHTML = `
+    function obtenerFechaFormateada(diasSumar = 4) {
+      const fecha = new Date();
+      fecha.setDate(fecha.getDate() + diasSumar);
+      const meses = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
+      const nombreMes = meses[fecha.getMonth()];
+      const dia = fecha.getDate();
+      const anio = fecha.getFullYear();
+      return `${nombreMes} ${dia}, ${anio}`;
+    }
+    function obtenerDireccionFormateada(data) {
+      const { city, street, number } = data;
+      return `${street} ${number}, ${city}`;
+    }
+
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formConfirmHomeDelivery";
+    form.innerHTML = `
     <h2>Confirmar direccion de envio</h2>
     <div class="shipping-info">
-      <p><strong>Fecha estimada de llegada:</strong> Octubre 10, 2024</p>
-      <p><strong>Direccion de envio:</strong> san martin 123, cordoba</p>
+      <p><strong>Fecha estimada de llegada:</strong> ${obtenerFechaFormateada()}</p>
+      <p><strong>Direccion de envio:</strong> ${obtenerDireccionFormateada(
+        this.data.homeDeliveryInfo
+      )}</p>
     </div>
-    <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>`;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formConfirmHomeDelivery());
+    <input type="submit" value="Continuar">`;
+    form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      form.remove();
+      this.openPaymentMethod();
+    });
+    modal.appendChild(form);
   },
   openPaymentMethod() {
-    function formPaymentMethod() {
-      const form = document.createElement("form");
-      form.id = "formPaymentMethod";
-      form.innerHTML = `
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formPaymentMethod";
+    form.innerHTML = `
                   <h2>Selecciona tu método de pago:</h2>
     <label>
         <input type="radio" name="metodo_pago" value="credito"> Tarjeta de crédito
@@ -138,38 +237,54 @@ const payment = {
         <input type="radio" name="metodo_pago" value="debito"> Tarjeta de débito
     </label>
     <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>
-
       `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formPaymentMethod());
+
+    form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const { metodo_pago } = form.elements;
+      metodo_pago.forEach((radio) => {
+        if (radio.checked) {
+          this.data.paymentMethod = radio.value;
+        }
+      });
+      if (this.data.paymentMethod) {
+        form.remove();
+        this.openEnterPaymentMethodInformation();
+      }
+    });
+    modal.appendChild(form);
   },
   openEnterPaymentMethodInformation() {
-    function formEnterPaymentMethodInformation() {
-      const form = document.createElement("form");
-      form.id = "formEnterPaymentMethodInformation";
-      form.innerHTML = `
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formEnterPaymentMethodInformation";
+    form.innerHTML = `
                    <h2>Ingresa la Informacion de tu Tarjeta</h2>
     <!-- Número de tarjeta -->
-    <label for="card-number">Numero de Tarjeta:</label>
-    <input type="text" id="card-number" name="card-number" maxlength="16" placeholder="1234 5678 9012 3456" required />
+    <label for="cardnumber">Numero de Tarjeta:</label>
+    <input type="text" id="cardnumber" name="cardnumber" maxlength="16" placeholder="1234 5678 9012 3456" required />
     <br />
 
     <!-- Nombre y apellido -->
-    <label for="card-name">Nombre Completo del Titular:</label>
-    <input type="text" id="card-name" name="card-name" placeholder="Nombre Completo" required />
+    <label for="cardname">Nombre Completo del Titular:</label>
+    <input type="text" id="cardname" name="cardname" placeholder="Nombre Completo" required />
     <br />
 
     <!-- Fecha de vencimiento -->
-    <label for="expiry-date">Fecha de Vencimiento:</label>
-    <input type="month" id="expiry-date" name="expiry-date" required />
+    <label for="expirydate">Fecha de Vencimiento:</label>
+    <input type="month" id="expirydate" name="expirydate" required />
     <br />
 
     <!-- Código de seguridad -->
-    <label for="security-code">Codigo de Seguridad (CVV):</label>
-    <input type="text" id="security-code" name="security-code" maxlength="3" placeholder="123" required />
+    <label for="securitycode">Codigo de Seguridad (CVV):</label>
+    <input type="text" id="securitycode" name="securitycode" maxlength="3" placeholder="123" required />
     <br />
 
     <!-- DNI del titular -->
@@ -178,142 +293,325 @@ const payment = {
     <br />
 
     <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>
       `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formEnterPaymentMethodInformation());
+    form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const { cardnumber, cardname, expirydate, securitycode, dni } =
+        form.elements;
+      if (cardnumber && cardname && expirydate && securitycode && dni) {
+        this.data.cardInfo.type = this.data.paymentMethod;
+        this.data.cardInfo.number = cardnumber.value;
+        this.data.cardInfo.name = cardname.value;
+        this.data.cardInfo.securityCode = securitycode.value;
+        this.data.cardInfo.expiryDate = expirydate.value;
+        this.data.cardInfo.dni = dni.value;
+        form.remove();
+
+        switch (this.data.cardInfo.type) {
+          case "credito":
+            this.openSelectCreditCardInstallments();
+            break;
+          case "debito":
+            this.openConfirmPurchase();
+            break;
+          default:
+            break;
+        }
+      }
+    });
+    modal.appendChild(form);
   },
   openSelectCreditCardInstallments() {
-    function formEnterPaymentMethodInformation() {
-      const form = document.createElement("form");
-      form.id = "formEnterPaymentMethodInformation";
-      form.innerHTML = `  <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    function identificarTarjeta(numeroTarjeta) {
+      // Convertir el número de tarjeta a cadena
+      const numero = numeroTarjeta.toString();
+
+      // Verificar la longitud mínima del número de tarjeta
+      // if (numero.length < 15) {
+      //     return "Número de tarjeta inválido";
+      // }
+
+      // Verificar si es American Express (comienza con 34 o 37)
+      const primerosDosDigitos = parseInt(numero.substring(0, 2));
+      if (primerosDosDigitos === 34 || primerosDosDigitos === 37) {
+        return "American Express";
+      }
+
+      // Verificar si es Visa (comienza con 4)
+      const primerDigito = parseInt(numero.charAt(0));
+      if (primerDigito === 4) {
+        return "Visa";
+      }
+
+      // Verificar si es Mastercard (comienza con 51-55 o 2221-2720)
+      const primerosSeisDigitos = parseInt(numero.substring(0, 6));
+      const primerosDosDigitosMC = parseInt(numero.substring(0, 2));
+
+      if (
+        (primerosDosDigitosMC >= 51 && primerosDosDigitosMC <= 55) ||
+        (primerosSeisDigitos >= 222100 && primerosSeisDigitos <= 272099)
+      ) {
+        return "Mastercard";
+      }
+
+      // Si no coincide con ninguna de las anteriores
+      return "Empresa emisora no identificada";
+    }
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "SelectCreditCardInstallments";
+    form.innerHTML = `  
+    <h2>Seleccioná las cuotas de tarjeta de credito</h2>
   <div>
-    <p>Mastercard **** 3564</p>
+    <p>${identificarTarjeta(
+      this.data.cardInfo.number
+    )} **** ${this.data.cardInfo.number.slice(-4)}</p>
     <label>
       <input type="radio" name="installments" value="1" />
-      1x $ 65.699
+      1x $ ${carrito.calcularTotal().toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="2" />
-      2x $ 34.626
+      2x $ ${(carrito.calcularTotal() / 2).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="3" />
-      3x $ 23.489
+      3x $ ${(carrito.calcularTotal() / 3).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="6" />
-      6x $ 12.474
+      6x $ ${(carrito.calcularTotal() / 6).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="9" />
-      9x $ 8.978
+      9x $ ${(carrito.calcularTotal() / 9).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="12" />
-      12x $ 7.296
+      12x $ ${(carrito.calcularTotal() / 12).toFixed(2)}
     </label>
     <br />
   </div>
     <input type="submit" value="Continuar">
-    <button type="submit">Cancelar</button>
  `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formEnterPaymentMethodInformation());
+    form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const { installments } = form.elements;
+      installments.forEach((radio) => {
+        if (radio.checked) {
+          this.data.cardInfo.installments = radio.value;
+        }
+      });
+      if (this.data.cardInfo.installments != null) {
+        form.remove();
+        this.openConfirmPurchase();
+      }
+    });
+    modal.appendChild(form);
   },
   openConfirmPurchase() {
-    function formConfirmPurchase() {
-      const form = document.createElement("form");
-      form.id = "formEnterPaymentMethodInformation";
-      form.innerHTML = ` 
-    <div>
+    function identificarTarjeta(numeroTarjeta) {
+      // Convertir el número de tarjeta a cadena
+      const numero = numeroTarjeta.toString();
+
+      // Verificar la longitud mínima del número de tarjeta
+      // if (numero.length < 15) {
+      //     return "Número de tarjeta inválido";
+      // }
+
+      // Verificar si es American Express (comienza con 34 o 37)
+      const primerosDosDigitos = parseInt(numero.substring(0, 2));
+      if (primerosDosDigitos === 34 || primerosDosDigitos === 37) {
+        return "American Express";
+      }
+
+      // Verificar si es Visa (comienza con 4)
+      const primerDigito = parseInt(numero.charAt(0));
+      if (primerDigito === 4) {
+        return "Visa";
+      }
+
+      // Verificar si es Mastercard (comienza con 51-55 o 2221-2720)
+      const primerosSeisDigitos = parseInt(numero.substring(0, 6));
+      const primerosDosDigitosMC = parseInt(numero.substring(0, 2));
+
+      if (
+        (primerosDosDigitosMC >= 51 && primerosDosDigitosMC <= 55) ||
+        (primerosSeisDigitos >= 222100 && primerosSeisDigitos <= 272099)
+      ) {
+        return "Mastercard";
+      }
+
+      // Si no coincide con ninguna de las anteriores
+      return "Empresa emisora no identificada";
+    }
+    function resumenProductosHtml() {
+      let html = ``;
+      carrito.productos.forEach((p) => {
+        html += `<div><span>${p.nombre}</span><span> x${
+          p.cantidad
+        }</span><span> $${p.precio.toFixed(2)}</span></div>`;
+      });
+      return html;
+    }
+    const modal = document.getElementById("payment");
+    const form = document.createElement("form");
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "Cancelar";
+    closeBtn.addEventListener("click", () => {
+      form.remove();
+      this.close();
+    });
+    form.id = "formConfirmPurchase";
+    form.innerHTML = ` 
+    ${
+      this.data.deliveryMethod == "domicilio"
+        ? `    <div>
       <h2>Detalle de Envio</h2>
-      <p><strong>Nombre:</strong> Juan Perez</p>
-      <p><strong>Direccion:</strong> san martin 1234, cordoba</p>
-      <p><strong>Ciudad:</strong> cordoba</p>
-      <p><strong>Codigo Postal:</strong> 12345</p>
-    </div>
+      <p><strong>Nombre:</strong> ${this.data.homeDeliveryInfo.fullName}</p>
+      <p><strong>Direccion:</strong> ${this.data.homeDeliveryInfo.street} ${this.data.homeDeliveryInfo.number}</p>
+      <p><strong>Ciudad:</strong> ${this.data.homeDeliveryInfo.city}, ${this.data.homeDeliveryInfo.province}</p>
+      <p><strong>Codigo Postal:</strong> ${this.data.homeDeliveryInfo.postalCode}</p>
+    </div>`
+        : ""
+    }
 
     <div>
       <h2>Detalle de pago</h2>
-      <p><strong>Metodo de pago:</strong> Mastercard **** 3564</p>
-      <p><strong>cuotas:</strong> 3x $ 23.489</p>
+
+      ${
+        this.data.cardInfo.type == "credito"
+          ? `
+        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
+          this.data.cardInfo.number
+        )} **** ${this.data.cardInfo.number.slice(-4)} (Credito)</p>
+        <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${(
+              carrito.calcularTotal() / this.data.cardInfo.installments
+            ).toFixed(2)}</p>
+        `
+          : ``
+      }
+            ${
+              this.data.cardInfo.type == "debito"
+                ? `
+        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
+          this.data.cardInfo.number
+        )} **** ${this.data.cardInfo.number.slice(-4)} (Debito)</p>
+        <p><strong>Total:</strong> $ ${carrito.calcularTotal().toFixed(2)}</p>
+        `
+                : ``
+            }
     </div>
 
     <div>
     <h2>Resumen de compra</h2>
       <div>
-        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
-        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
-        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
+      ${resumenProductosHtml()}
+      ${
+        carrito.calcularTotal() <= 500
+          ? `<span>Envio: $6</span>`
+          : `<span>Envio: GRATIS</span>`
+      }
       </div>
-      <p>Total: $12345.67</p>
+
+      ${
+        carrito.calcularTotal() <= 500
+          ? `
+      <p>Total: $${(carrito.calcularTotal() + 6).toFixed(2)}</p>
+        `
+          : `
+      <p>Total: $${carrito.calcularTotal().toFixed(2)}</p>
+        `
+      }
     </div>
 
     <input type="submit" value="Confirmar Compra">
-    <button type="submit">Cancelar</button>
  `;
-      return form;
-    }
-    const payment = document.getElementById("payment");
-    payment.appendChild(formConfirmPurchase());
+    form.appendChild(closeBtn);
+    form.addEventListener("submit", () => {
+      form.remove();
+      this.openThankYou();
+    });
+    modal.appendChild(form);
   },
-  test(view, delay) {
-    switch (view) {
-      case 1:
-        this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openChooseDeliveryMethod, delay);
-        setTimeout(this.close, delay * 10);
-        break;
-      case 2:
-        this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openHomeDelivery, delay);
-        setTimeout(this.close, delay * 10);
-        break;
-      case 3:
-        this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openConfirmHomeDelivery, delay);
-        setTimeout(this.close, delay * 10);
-        break;
-      case 4:
-        this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openPaymentMethod, delay);
-        setTimeout(this.close, delay * 10);
-        break;
-      case 5:
-        this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openEnterPaymentMethodInformation, delay);
-        setTimeout(this.close, delay * 10);
-        break;
-      case 6:
-        this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openSelectCreditCardInstallments, delay);
-        setTimeout(this.close, delay * 10);
-        break;
-      case 7:
-        this.open();
-        this.loadingSkeleton();
-        setTimeout(this.openConfirmPurchase, delay);
-        setTimeout(this.close, delay * 10);
-        break;
-      default:
-        break;
-    }
+  openThankYou() {
+    const ty = document.createElement("section");
+    const modal = document.getElementById("payment");
+    const closeBtn = document.createElement("a");
+    closeBtn.textContent = "Descargar Comporobante";
+    closeBtn.classList.add("cerrar-modal");
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      ty.remove();
+      this.close();
+    });
+    ty.id = "thankYou";
+    ty.innerHTML = `
+            <div class="modal-container">
+      <h2 class="modal-titulo">Gracias por comprar en TecnoShop</h2>
+      <p class="modal-parrafo">¡Su compra fue realizada con exito!</p>
+    </div>
+      `;
+    modal.appendChild(ty);
+    document.querySelector("#thankYou > div").appendChild(closeBtn);
+  },
+  data: {
+    deliveryMethod: null,
+    homeDeliveryInfo: {
+      fullName: null,
+      postalCode: null,
+      province: null,
+      city: null,
+      street: null,
+      number: null,
+      contactPhone: null,
+      indications: null,
+    },
+    paymentMethod: null,
+    cardInfo: {
+      type: null,
+      installments: null,
+      number: null,
+      name: null,
+      securityCode: null,
+      expiryDate: null,
+      dni: null,
+    },
+    getDeliveryMethod() {
+      if (this.deliveryMethod.delivery) {
+        return "delivery";
+      }
+      if (this.deliveryMethod.delivery) {
+        return "local";
+      }
+    },
+    gethomeDeliveryInfo() {
+      return this.homeDeliveryInfo;
+    },
+    getPaymentMethod() {
+      if (this.paymentMethod.creditCard) {
+        return "creditCard";
+      }
+      if (this.paymentMethod.debitCard) {
+        return "debitCard";
+      }
+    },
+    getCardInfo() {
+      return this.cardInfo;
+    },
   },
 };
