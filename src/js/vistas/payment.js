@@ -68,6 +68,27 @@ const payment = {
         <input type="submit" value="Continuar">
         `;
     form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const { opcion_envio } = form.elements;
+      opcion_envio.forEach((radio) => {
+        if (radio.checked) {
+          this.data.deliveryMethod = radio.value;
+        }
+      });
+      switch (this.data.deliveryMethod) {
+        case "domicilio":
+          modal.innerHTML = "";
+          this.openHomeDelivery();
+          break;
+        case "punto_entrega":
+          modal.innerHTML = "";
+          this.openPaymentMethod();
+          break;
+        default:
+          break;
+      }
+    });
     modal.appendChild(form);
   },
   openHomeDelivery() {
@@ -81,36 +102,82 @@ const payment = {
     });
     form.id = "formHomeDelivery";
     form.innerHTML = `
-              <label for="nombre_apellido">Nombre y apellido (tal cual figura en el DNI):</label>
-        <input type="text" id="nombre_apellido" name="nombre_apellido" required>
+              <label for="fullName">Nombre y apellido (tal cual figura en el DNI):</label>
+        <input type="text" id="fullName" name="fullName" required>
 
-        <label for="codigo_postal">Código postal:</label>
-        <input type="text" id="codigo_postal" name="codigo_postal" required>
+        <label for="postalCode">Código postal:</label>
+        <input type="text" id="postalCode" name="postalCode" required>
 
-        <label for="provincia">Provincia:</label> 
-        <input type="text" id="provincia" name="provincia" required>
+        <label for="province">Provincia:</label> 
+        <input type="text" id="province" name="province" required>
 
-        <label for="localidad">Localidad/Barrio:</label>
-        <input type="text" id="localidad" name="localidad" required>
+        <label for="neighborhood">Localidad/Barrio:</label>
+        <input type="text" id="neighborhood" name="neighborhood" required>
 
-        <label for="calle">Calle/Avenida:</label>
-        <input type="text" id="calle" name="calle" required>
+        <label for="street">Calle/Avenida:</label>
+        <input type="text" id="street" name="street" required>
 
-        <label for="numero">Número:</label>
-        <input type="text" id="numero" name="numero" required>
+        <label for="number">Número:</label>
+        <input type="text" id="number" name="number" required>
 
-        <label for="telefono">Teléfono de contacto:</label>
-        <input type="tel" id="telefono" name="telefono" required>
+        <label for="contactPhone">Teléfono de contacto:</label>
+        <input type="tel" id="contactPhone" name="contactPhone" required>
 
-        <label for="indicaciones">Indicaciones adicionales (opcional):</label>
-        <textarea id="indicaciones" name="indicaciones"></textarea>
+        <label for="indications">Indicaciones adicionales (opcional):</label>
+        <textarea id="indications" name="indications"></textarea>
 
         <input type="submit" value="Enviar">
       `;
     form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const {
+        fullName,
+        postalCode,
+        province,
+        neighborhood,
+        street,
+        number,
+        contactPhone,
+        indications,
+      } = form.elements;
+      if (
+        fullName.value &&
+        postalCode.value &&
+        province.value &&
+        neighborhood.value &&
+        street.value &&
+        number.value &&
+        contactPhone.value
+      ) {
+        this.data.homeDeliveryInfo.fullName = fullName.value;
+        this.data.homeDeliveryInfo.postalCode = postalCode.value;
+        this.data.homeDeliveryInfo.province = province.value;
+        this.data.homeDeliveryInfo.neighborhood = neighborhood.value;
+        this.data.homeDeliveryInfo.street = street.value;
+        this.data.homeDeliveryInfo.number = number.value;
+        this.data.homeDeliveryInfo.contactPhone = contactPhone.value;
+        this.data.homeDeliveryInfo.indications = indications.value;
+      }
+      // console.log(this.data.gethomeDeliveryInfo());
+
+      switch (this.data.deliveryMethod) {
+        case "domicilio":
+          modal.innerHTML = "";
+          this.openHomeDelivery();
+          break;
+        case "punto_entrega":
+          modal.innerHTML = "";
+          this.openPaymentMethod();
+          break;
+        default:
+          break;
+      }
+    });
     modal.appendChild(form);
   },
   openConfirmHomeDelivery() {
+    this.view = 3;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -131,6 +198,7 @@ const payment = {
     modal.appendChild(form);
   },
   openPaymentMethod() {
+    this.view = 4;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -155,6 +223,7 @@ const payment = {
     form.appendChild(closeBtn);
   },
   openEnterPaymentMethodInformation() {
+    this.view = 5;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -197,6 +266,7 @@ const payment = {
     modal.appendChild(form);
   },
   openSelectCreditCardInstallments() {
+    this.view = 6;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -246,6 +316,7 @@ const payment = {
     modal.appendChild(form);
   },
   openConfirmPurchase() {
+    this.view = 7;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -286,6 +357,7 @@ const payment = {
     modal.appendChild(form);
   },
   openThankYou() {
+    this.view = 8;
     const ty = document.createElement("section");
     const modal = document.getElementById("payment");
     const closeBtn = document.createElement("a");
@@ -345,10 +417,7 @@ const payment = {
     }
   },
   data: {
-    deliveryMethod: {
-      delivery: false,
-      local: false,
-    },
+    deliveryMethod: null,
     homeDeliveryInfo: {
       fullName: null,
       postalCode: null,
@@ -381,7 +450,7 @@ const payment = {
       }
     },
     gethomeDeliveryInfo() {
-      return this.homeDeliveryInfo();
+      return this.homeDeliveryInfo;
     },
     getPaymentMethod() {
       if (this.paymentMethod.creditCard) {
