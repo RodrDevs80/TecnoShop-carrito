@@ -158,20 +158,10 @@ const payment = {
         this.data.homeDeliveryInfo.number = number.value;
         this.data.homeDeliveryInfo.contactPhone = contactPhone.value;
         this.data.homeDeliveryInfo.indications = indications.value;
-      }
-      // console.log(this.data.gethomeDeliveryInfo());
-
-      switch (this.data.deliveryMethod) {
-        case "domicilio":
-          modal.innerHTML = "";
-          this.openHomeDelivery();
-          break;
-        case "punto_entrega":
-          modal.innerHTML = "";
-          this.openPaymentMethod();
-          break;
-        default:
-          break;
+        console.log(this.data.gethomeDeliveryInfo());
+        form.remove()
+        this.openConfirmHomeDelivery();
+        
       }
     });
     modal.appendChild(form);
