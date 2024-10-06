@@ -158,7 +158,6 @@ const payment = {
         this.data.homeDeliveryInfo.number = number.value;
         this.data.homeDeliveryInfo.contactPhone = contactPhone.value;
         this.data.homeDeliveryInfo.indications = indications.value;
-        // console.log(this.data.gethomeDeliveryInfo());
         form.remove();
         this.openConfirmHomeDelivery();
       }
@@ -193,7 +192,6 @@ const payment = {
       return `${street} ${number}, ${city}`;
     }
 
-    this.view = 3;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -221,7 +219,6 @@ const payment = {
     modal.appendChild(form);
   },
   openPaymentMethod() {
-    this.view = 4;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -257,7 +254,6 @@ const payment = {
     modal.appendChild(form);
   },
   openEnterPaymentMethodInformation() {
-    this.view = 5;
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -299,8 +295,7 @@ const payment = {
     form.appendChild(closeBtn);
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      console.log(form.elements);
-      
+
       const { cardnumber, cardname, expirydate, securitycode, dni } =
         form.elements;
       if (cardnumber && cardname && expirydate && securitycode && dni) {
@@ -310,7 +305,6 @@ const payment = {
         this.data.cardInfo.securityCode = securitycode.value;
         this.data.cardInfo.expiryDate = expirydate.value;
         this.data.cardInfo.dni = dni.value;
-        console.log(this.data.getCardInfo());
         form.remove();
 
         switch (this.data.cardInfo.type) {
@@ -331,36 +325,38 @@ const payment = {
     function identificarTarjeta(numeroTarjeta) {
       // Convertir el número de tarjeta a cadena
       const numero = numeroTarjeta.toString();
-  
+
       // Verificar la longitud mínima del número de tarjeta
       // if (numero.length < 15) {
       //     return "Número de tarjeta inválido";
       // }
-  
+
       // Verificar si es American Express (comienza con 34 o 37)
       const primerosDosDigitos = parseInt(numero.substring(0, 2));
       if (primerosDosDigitos === 34 || primerosDosDigitos === 37) {
-          return "American Express";
+        return "American Express";
       }
-  
+
       // Verificar si es Visa (comienza con 4)
       const primerDigito = parseInt(numero.charAt(0));
       if (primerDigito === 4) {
-          return "Visa";
+        return "Visa";
       }
-  
+
       // Verificar si es Mastercard (comienza con 51-55 o 2221-2720)
       const primerosSeisDigitos = parseInt(numero.substring(0, 6));
       const primerosDosDigitosMC = parseInt(numero.substring(0, 2));
-  
-      if ((primerosDosDigitosMC >= 51 && primerosDosDigitosMC <= 55) || 
-          (primerosSeisDigitos >= 222100 && primerosSeisDigitos <= 272099)) {
-          return "Mastercard";
+
+      if (
+        (primerosDosDigitosMC >= 51 && primerosDosDigitosMC <= 55) ||
+        (primerosSeisDigitos >= 222100 && primerosSeisDigitos <= 272099)
+      ) {
+        return "Mastercard";
       }
-  
+
       // Si no coincide con ninguna de las anteriores
       return "Empresa emisora no identificada";
-  }
+    }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -369,10 +365,13 @@ const payment = {
       form.remove();
       this.close();
     });
-    form.id = "formEnterPaymentMethodInformation";
-    form.innerHTML = `  <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    form.id = "SelectCreditCardInstallments";
+    form.innerHTML = `  
+    <h2>Seleccioná las cuotas de tarjeta de credito</h2>
   <div>
-    <p>${identificarTarjeta(this.data.cardInfo.number)} **** ${this.data.cardInfo.number.slice(-4)}</p>
+    <p>${identificarTarjeta(
+      this.data.cardInfo.number
+    )} **** ${this.data.cardInfo.number.slice(-4)}</p>
     <label>
       <input type="radio" name="installments" value="1" />
       1x $ ${carrito.calcularTotal().toFixed(2)}
@@ -380,37 +379,95 @@ const payment = {
     <br />
     <label>
       <input type="radio" name="installments" value="2" />
-      2x $ ${(carrito.calcularTotal()/2).toFixed(2)}
+      2x $ ${(carrito.calcularTotal() / 2).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="3" />
-      3x $ ${(carrito.calcularTotal()/3).toFixed(2)}
+      3x $ ${(carrito.calcularTotal() / 3).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="6" />
-      6x $ ${(carrito.calcularTotal()/6).toFixed(2)}
+      6x $ ${(carrito.calcularTotal() / 6).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="9" />
-      9x $ ${(carrito.calcularTotal()/9).toFixed(2)}
+      9x $ ${(carrito.calcularTotal() / 9).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="12" />
-      12x $ ${(carrito.calcularTotal()/12).toFixed(2)}
+      12x $ ${(carrito.calcularTotal() / 12).toFixed(2)}
     </label>
     <br />
   </div>
     <input type="submit" value="Continuar">
  `;
     form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const { installments } = form.elements;
+      installments.forEach((radio) => {
+        if (radio.checked) {
+          this.data.cardInfo.installments = radio.value;
+          console.log(radio.value);
+        }
+      });
+      console.log(this.data.cardInfo.installments);
+      if (this.data.cardInfo.installments != null) {
+        form.remove();
+        this.openConfirmPurchase();
+      }
+    });
     modal.appendChild(form);
   },
   openConfirmPurchase() {
-    this.view = 7;
+    function identificarTarjeta(numeroTarjeta) {
+      // Convertir el número de tarjeta a cadena
+      const numero = numeroTarjeta.toString();
+
+      // Verificar la longitud mínima del número de tarjeta
+      // if (numero.length < 15) {
+      //     return "Número de tarjeta inválido";
+      // }
+
+      // Verificar si es American Express (comienza con 34 o 37)
+      const primerosDosDigitos = parseInt(numero.substring(0, 2));
+      if (primerosDosDigitos === 34 || primerosDosDigitos === 37) {
+        return "American Express";
+      }
+
+      // Verificar si es Visa (comienza con 4)
+      const primerDigito = parseInt(numero.charAt(0));
+      if (primerDigito === 4) {
+        return "Visa";
+      }
+
+      // Verificar si es Mastercard (comienza con 51-55 o 2221-2720)
+      const primerosSeisDigitos = parseInt(numero.substring(0, 6));
+      const primerosDosDigitosMC = parseInt(numero.substring(0, 2));
+
+      if (
+        (primerosDosDigitosMC >= 51 && primerosDosDigitosMC <= 55) ||
+        (primerosSeisDigitos >= 222100 && primerosSeisDigitos <= 272099)
+      ) {
+        return "Mastercard";
+      }
+
+      // Si no coincide con ninguna de las anteriores
+      return "Empresa emisora no identificada";
+    }
+    function resumenProductosHtml() {
+      let html = ``;
+      carrito.productos.forEach((p) => {
+        html += `<div><span>${p.nombre}</span><span> x${
+          p.cantidad
+        }</span><span> $${p.precio.toFixed(2)}</span></div>`;
+      });
+      return html;
+    }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -421,41 +478,81 @@ const payment = {
     });
     form.id = "formConfirmPurchase";
     form.innerHTML = ` 
-    <div>
+    ${
+      this.data.deliveryMethod == "domicilio"
+        ? `    <div>
       <h2>Detalle de Envio</h2>
-      <p><strong>Nombre:</strong> Juan Perez</p>
-      <p><strong>Direccion:</strong> san martin 1234, cordoba</p>
-      <p><strong>Ciudad:</strong> cordoba</p>
-      <p><strong>Codigo Postal:</strong> 12345</p>
-    </div>
+      <p><strong>Nombre:</strong> ${this.data.homeDeliveryInfo.name}</p>
+      <p><strong>Direccion:</strong> ${this.data.homeDeliveryInfo.street} ${this.data.homeDeliveryInfo.number}</p>
+      <p><strong>Ciudad:</strong> ${this.data.homeDeliveryInfo.city}, ${this.data.homeDeliveryInfo.province}</p>
+      <p><strong>Codigo Postal:</strong> ${this.data.homeDeliveryInfo.postalCode}</p>
+    </div>`
+        : ""
+    }
 
     <div>
       <h2>Detalle de pago</h2>
-      <p><strong>Metodo de pago:</strong> Mastercard **** 3564</p>
-      <p><strong>cuotas:</strong> 3x $ 23.489</p>
+
+      ${
+        this.data.cardInfo.type == "credito"
+          ? `
+        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
+          this.data.cardInfo.number
+        )} **** ${this.data.cardInfo.number.slice(-4)} (Credito)</p>
+        <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${(
+              carrito.calcularTotal() / this.data.cardInfo.installments
+            ).toFixed(2)}</p>
+        `
+          : ``
+      }
+            ${
+              this.data.cardInfo.type == "debito"
+                ? `
+        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
+          this.data.cardInfo.number
+        )} **** ${this.data.cardInfo.number.slice(-4)} (Debito)</p>
+        <p><strong>Total:</strong> $ ${carrito.calcularTotal().toFixed(2)}</p>
+        `
+                : ``
+            }
     </div>
 
     <div>
     <h2>Resumen de compra</h2>
       <div>
-        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
-        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
-        <div><span>Producto</span><span>x3</span><span>$1234.54</span></div>
+      ${resumenProductosHtml()}
+      ${
+        carrito.calcularTotal() <= 500
+          ? `<span>Envio: $6</span>`
+          : `<span>Envio: GRATIS</span>`
+      }
       </div>
-      <p>Total: $12345.67</p>
+
+      ${
+        carrito.calcularTotal() <= 500
+          ? `
+      <p>Total: $${(carrito.calcularTotal() + 6).toFixed(2)}</p>
+        `
+          : `
+      <p>Total: $${carrito.calcularTotal().toFixed(2)}</p>
+        `
+      }
     </div>
 
     <input type="submit" value="Confirmar Compra">
  `;
     form.appendChild(closeBtn);
+    form.addEventListener("submit", () => {
+      form.remove();
+      this.openThankYou();
+    });
     modal.appendChild(form);
   },
   openThankYou() {
-    this.view = 8;
     const ty = document.createElement("section");
     const modal = document.getElementById("payment");
     const closeBtn = document.createElement("a");
-    closeBtn.textContent = "Volver";
+    closeBtn.textContent = "Descargar Comporobante";
     closeBtn.classList.add("cerrar-modal");
     closeBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -525,7 +622,7 @@ const payment = {
     paymentMethod: null,
     cardInfo: {
       type: null,
-      Installments: null,
+      installments: null,
       number: null,
       name: null,
       securityCode: null,
