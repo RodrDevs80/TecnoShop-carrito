@@ -207,10 +207,17 @@ const payment = {
     <h2>Confirmar direccion de envio</h2>
     <div class="shipping-info">
       <p><strong>Fecha estimada de llegada:</strong> ${obtenerFechaFormateada()}</p>
-      <p><strong>Direccion de envio:</strong> ${obtenerDireccionFormateada(this.data.homeDeliveryInfo)}</p>
+      <p><strong>Direccion de envio:</strong> ${obtenerDireccionFormateada(
+        this.data.homeDeliveryInfo
+      )}</p>
     </div>
     <input type="submit" value="Continuar">`;
     form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      form.remove();
+      this.openPaymentMethod();
+    });
     modal.appendChild(form);
   },
   openPaymentMethod() {
@@ -235,8 +242,19 @@ const payment = {
     <input type="submit" value="Continuar">
       `;
 
-    modal.appendChild(form);
     form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const { metodo_pago } = form.elements;
+      metodo_pago.forEach((radio) => {
+        if (radio.checked) {
+          this.data.paymentMethod = radio.value;
+        }
+      });
+      form.remove();
+      this.openEnterPaymentMethodInformation();
+    });
+    modal.appendChild(form);
   },
   openEnterPaymentMethodInformation() {
     this.view = 5;
@@ -252,23 +270,23 @@ const payment = {
     form.innerHTML = `
                    <h2>Ingresa la Informacion de tu Tarjeta</h2>
     <!-- Número de tarjeta -->
-    <label for="card-number">Numero de Tarjeta:</label>
-    <input type="text" id="card-number" name="card-number" maxlength="16" placeholder="1234 5678 9012 3456" required />
+    <label for="cardnumber">Numero de Tarjeta:</label>
+    <input type="text" id="cardnumber" name="cardnumber" maxlength="16" placeholder="1234 5678 9012 3456" required />
     <br />
 
     <!-- Nombre y apellido -->
-    <label for="card-name">Nombre Completo del Titular:</label>
-    <input type="text" id="card-name" name="card-name" placeholder="Nombre Completo" required />
+    <label for="cardname">Nombre Completo del Titular:</label>
+    <input type="text" id="cardname" name="cardname" placeholder="Nombre Completo" required />
     <br />
 
     <!-- Fecha de vencimiento -->
-    <label for="expiry-date">Fecha de Vencimiento:</label>
-    <input type="month" id="expiry-date" name="expiry-date" required />
+    <label for="expirydate">Fecha de Vencimiento:</label>
+    <input type="month" id="expirydate" name="expirydate" required />
     <br />
 
     <!-- Código de seguridad -->
-    <label for="security-code">Codigo de Seguridad (CVV):</label>
-    <input type="text" id="security-code" name="security-code" maxlength="3" placeholder="123" required />
+    <label for="securitycode">Codigo de Seguridad (CVV):</label>
+    <input type="text" id="securitycode" name="securitycode" maxlength="3" placeholder="123" required />
     <br />
 
     <!-- DNI del titular -->
@@ -279,10 +297,70 @@ const payment = {
     <input type="submit" value="Continuar">
       `;
     form.appendChild(closeBtn);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      console.log(form.elements);
+      
+      const { cardnumber, cardname, expirydate, securitycode, dni } =
+        form.elements;
+      if (cardnumber && cardname && expirydate && securitycode && dni) {
+        this.data.cardInfo.type = this.data.paymentMethod;
+        this.data.cardInfo.number = cardnumber.value;
+        this.data.cardInfo.name = cardname.value;
+        this.data.cardInfo.securityCode = securitycode.value;
+        this.data.cardInfo.expiryDate = expirydate.value;
+        this.data.cardInfo.dni = dni.value;
+        console.log(this.data.getCardInfo());
+        form.remove();
+
+        switch (this.data.cardInfo.type) {
+          case "credito":
+            this.openSelectCreditCardInstallments();
+            break;
+          case "debito":
+            this.openConfirmPurchase();
+            break;
+          default:
+            break;
+        }
+      }
+    });
     modal.appendChild(form);
   },
   openSelectCreditCardInstallments() {
-    this.view = 6;
+    function identificarTarjeta(numeroTarjeta) {
+      // Convertir el número de tarjeta a cadena
+      const numero = numeroTarjeta.toString();
+  
+      // Verificar la longitud mínima del número de tarjeta
+      // if (numero.length < 15) {
+      //     return "Número de tarjeta inválido";
+      // }
+  
+      // Verificar si es American Express (comienza con 34 o 37)
+      const primerosDosDigitos = parseInt(numero.substring(0, 2));
+      if (primerosDosDigitos === 34 || primerosDosDigitos === 37) {
+          return "American Express";
+      }
+  
+      // Verificar si es Visa (comienza con 4)
+      const primerDigito = parseInt(numero.charAt(0));
+      if (primerDigito === 4) {
+          return "Visa";
+      }
+  
+      // Verificar si es Mastercard (comienza con 51-55 o 2221-2720)
+      const primerosSeisDigitos = parseInt(numero.substring(0, 6));
+      const primerosDosDigitosMC = parseInt(numero.substring(0, 2));
+  
+      if ((primerosDosDigitosMC >= 51 && primerosDosDigitosMC <= 55) || 
+          (primerosSeisDigitos >= 222100 && primerosSeisDigitos <= 272099)) {
+          return "Mastercard";
+      }
+  
+      // Si no coincide con ninguna de las anteriores
+      return "Empresa emisora no identificada";
+  }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -294,35 +372,35 @@ const payment = {
     form.id = "formEnterPaymentMethodInformation";
     form.innerHTML = `  <h2>Seleccioná las cuotas de tarjeta de credito</h2>
   <div>
-    <p>Mastercard **** 3564</p>
+    <p>${identificarTarjeta(this.data.cardInfo.number)} **** ${this.data.cardInfo.number.slice(-4)}</p>
     <label>
       <input type="radio" name="installments" value="1" />
-      1x $ 65.699
+      1x $ ${carrito.calcularTotal().toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="2" />
-      2x $ 34.626
+      2x $ ${(carrito.calcularTotal()/2).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="3" />
-      3x $ 23.489
+      3x $ ${(carrito.calcularTotal()/3).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="6" />
-      6x $ 12.474
+      6x $ ${(carrito.calcularTotal()/6).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="9" />
-      9x $ 8.978
+      9x $ ${(carrito.calcularTotal()/9).toFixed(2)}
     </label>
     <br />
     <label>
       <input type="radio" name="installments" value="12" />
-      12x $ 7.296
+      12x $ ${(carrito.calcularTotal()/12).toFixed(2)}
     </label>
     <br />
   </div>
@@ -444,10 +522,7 @@ const payment = {
       contactPhone: null,
       indications: null,
     },
-    paymentMethod: {
-      creditCard: false,
-      debitCard: false,
-    },
+    paymentMethod: null,
     cardInfo: {
       type: null,
       Installments: null,
