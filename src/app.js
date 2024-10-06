@@ -41,7 +41,8 @@ const productos = [
   new Producto(
     "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ",
     999.99,
-    "MONITOR PARA JUEGOS CURVO 32:9 SÚPER ULTRAANCHO DE 49 PULGADAS con pantalla dual de 27", "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
+    "MONITOR PARA JUEGOS CURVO 32:9 SÚPER ULTRAANCHO DE 49 PULGADAS con pantalla dual de 27",
+    "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
     "electrónica"
   ),
   new Producto(
@@ -65,7 +66,6 @@ const productos = [
     "https://microglobalpromos.com.ar/2024/img/092024/HSC416U32C4%2016G_02.jpg",
     "electrónica"
   ),
-
 ];
 
 function controlVistaPrincipal(
@@ -113,6 +113,19 @@ function controlCarrito(e, carrito) {
 document.addEventListener("click", (e) => {
   controlCarrito(e, carrito);
 });
+
+function paymentControl(payment, carrito) {
+  document.getElementById("realizar-compra").addEventListener("click", () => {
+    if (carrito.productos.length == 0) {
+      alert("El carrito esta vacio");
+    } else {
+      payment.open();
+      payment.loadingSkeleton();
+      setTimeout(()=>{payment.openChooseDeliveryMethod()}, 1000);
+    }
+  });
+}
+paymentControl(payment, carrito);
 
 window.onload = controlVistaPrincipal(
   "contenedor-productos",
