@@ -78,6 +78,11 @@ body {
   text-align: center;
   margin-bottom: 0;
 }
+.logo-tecno {
+  margin-top: 10px;
+  width: 15%;
+  border-radius: 50%;
+}
 .contenedor-productos {
   margin: 0px 10px;
   display: grid;
@@ -90,11 +95,17 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, 1fr);
   }
+  .logo-tecno {
+    width: 20%;
+  }
 }
 @media only screen and (max-width: 800px) {
   .contenedor-productos {
     grid-template-columns: 1fr;
     place-items: center;
+  }
+  .logo-tecno {
+    width: 22.5%;
   }
 }
 @media only screen and (max-width: 700px) {
@@ -122,6 +133,9 @@ body {
     /* asocia el checked al menu*/
     display: block;
   }
+  .logo-tecno {
+    width: 25%;
+  }
 }
 @media only screen and (max-width: 610px) {
   section {
@@ -129,6 +143,9 @@ body {
   }
   .card {
     display: none;
+  }
+  .logo-tecno {
+    width: 35%;
   }
 }
 /*Quienes Somos*/

@@ -18,10 +18,10 @@ const productos = [
   ),
 
   new Producto(
-    "Silicon Power SSD 3D NAND de 256GB A55 SLC Cache Performance Boost SATA III 2.5",
-    80,
-    "Se aplica flash 3D NAND para ofrecer altas velocidades de transferencia Velocidades de transferencia",
-    "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+    "Disco Solido Interno Western Digital 1TB Red SATA SA500",
+    280,
+    "Wd Red Sa500 Wds100t1r0a - Ssd - 1 Tb - Interno - 2.5 - Sata 6gb/s",
+    "https://cdn.cs.1worldsync.com/3b/dd/3bdd97d3-e1fd-4f10-941d-ea87b0e68b11.jpg",
     "electrónica"
   ),
   new Producto(

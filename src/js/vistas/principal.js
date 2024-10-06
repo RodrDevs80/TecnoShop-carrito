@@ -36,9 +36,17 @@ const principal = {
       btnAgregarAlCarrito.classList.add("btn-agregar-carrito");
       btnAgregarAlCarrito.textContent = "Agregar 🛒";
       const manejarAgregarAlCarrito = () => {
-        carritoDeCompras.agregarProducto(
-          new Producto(nombre, precio, descripcion, imagen, categoria, 1, id)
-        );
+        //aquí controlar que se agregue o no el producto!!!
+
+        const newProducto = new Producto(nombre, precio, descripcion, imagen, categoria, 1, id);
+        !carritoDeCompras.productos.find(item => item.id === newProducto.id) ? carritoDeCompras.agregarProducto(newProducto) : Swal.fire({
+          title: "¡El Producto ya esta en el carrito! 📢",
+          text: "Este producto ya está en tu carrito. Puedes aumentar la cantidad desde allí.",
+          icon: "error",
+          confirmButtonText: "Aceptar"
+        });
+
+
       };
       btnAgregarAlCarrito.addEventListener("click", manejarAgregarAlCarrito);
       hCardProducto.appendChild(div);

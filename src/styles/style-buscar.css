@@ -142,3 +142,19 @@
 .envio-gratis > img {
   width: 40px;
 }
+
+@media only screen and (max-width: 999px) {
+  .img-busqueda {
+    width: 25%;
+    border-radius: 10px;
+  }
+  .contenedor-busqueda-resultado {
+    grid-template-columns: auto auto auto;
+  }
+}
+@media only screen and (max-width: 610px) {
+  .img-busqueda {
+    width: 50%;
+    border-radius: 9px;
+  }
+}
