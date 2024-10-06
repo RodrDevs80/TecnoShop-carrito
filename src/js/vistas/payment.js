@@ -248,8 +248,10 @@ const payment = {
           this.data.paymentMethod = radio.value;
         }
       });
-      form.remove();
-      this.openEnterPaymentMethodInformation();
+      if (this.data.paymentMethod) {
+        form.remove();
+        this.openEnterPaymentMethodInformation();
+      }
     });
     modal.appendChild(form);
   },
@@ -412,10 +414,8 @@ const payment = {
       installments.forEach((radio) => {
         if (radio.checked) {
           this.data.cardInfo.installments = radio.value;
-          console.log(radio.value);
         }
       });
-      console.log(this.data.cardInfo.installments);
       if (this.data.cardInfo.installments != null) {
         form.remove();
         this.openConfirmPurchase();
@@ -568,44 +568,6 @@ const payment = {
       `;
     modal.appendChild(ty);
     document.querySelector("#thankYou > div").appendChild(closeBtn);
-  },
-  test(view) {
-    switch (view) {
-      case 1:
-        this.open();
-        this.openChooseDeliveryMethod();
-        break;
-      case 2:
-        this.open();
-        this.openHomeDelivery();
-        break;
-      case 3:
-        this.open();
-        this.openConfirmHomeDelivery();
-        break;
-      case 4:
-        this.open();
-        this.openPaymentMethod();
-        break;
-      case 5:
-        this.open();
-        this.openEnterPaymentMethodInformation();
-        break;
-      case 6:
-        this.open();
-        this.openSelectCreditCardInstallments();
-        break;
-      case 7:
-        this.open();
-        this.openConfirmPurchase();
-        break;
-      case 8:
-        this.open();
-        this.openThankYou();
-        break;
-      default:
-        break;
-    }
   },
   data: {
     deliveryMethod: null,
