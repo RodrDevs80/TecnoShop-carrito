@@ -1,0 +1,52 @@
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#payment-loading-skeleton {
+  filter: invert(34%) sepia(86%) saturate(6781%) hue-rotate(267deg)
+    brightness(97%) contrast(115%);
+  animation: loading 0.3s ease-in-out 0s 3 normal forwards;
+}
+#opacity-payment {
+  z-index: 3;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  background-color: black;
+  opacity: 80%;
+  width: 100vw;
+  height: 100vh;
+}
+#payment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
+  overflow-y: scroll;
+  color: rgb(77, 99, 93);
+}
+
+#payment > *:not(#payment-loading-skeleton, #thankYou){
+	display: flex;
+	flex-direction: column;
+	background-color:#141414;
+	padding: 20px;
+  z-index: 4;
+  height: fit-content;
+  width: fit-content;
+
+}
+
+#payment input,#payment button{
+  background-color: #1b3e57;
+}

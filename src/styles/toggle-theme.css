@@ -1,0 +1,14 @@
+#toggle-theme{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+}
+
+.img-carrito{
+    border-radius: 5px; 
+    background-color: #d6eaf8;
+    padding: 4px; 
+    border: black solid 2 px;
+}
