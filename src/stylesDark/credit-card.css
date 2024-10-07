@@ -1,0 +1,175 @@
+/*Tarjeta de crédito*/
+.card-h2 {
+  text-align: center;
+  font-family: "Bungee Tint", system-ui;
+}
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  padding: 30px;
+}
+.card {
+  position: relative;
+  height: 314px;
+  width: 508px;
+  transform-style: preserve-3d;
+  perspective: 500px;
+}
+.card .card1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border-radius: 5%;
+  background: rgba(225, 225, 255, 0.05);
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  transition: 1s;
+  backface-visibility: hidden;
+  background-color: blue;
+}
+.card:hover .card1.front {
+  transform: rotateY(180deg);
+}
+.card .card1.back {
+  transform: rotateY(180deg);
+}
+.card:hover .card1.back {
+  transform: rotateY(360deg);
+}
+.card .card1.front::before {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.card .card1.front::after {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  right: 80px;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+.card .card1.front .debit {
+  position: relative;
+  right: -10%;
+  top: 30px;
+  color: #fff;
+  font-weight: 500;
+}
+.card .card1.front .bank {
+  position: absolute;
+  right: 40px;
+  top: 25px;
+  color: #fff;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 24px;
+}
+.card .card1.front .chip {
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  max-width: 64px;
+}
+.card .card1.front .number {
+  position: absolute;
+  bottom: 130px;
+  left: 40px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 6px;
+  font-size: 18px;
+  text-shadow: 0 2px 1px #0005;
+  font-family: "Courier New", Courier, monospace;
+}
+.card .card1.front .validdate {
+  position: absolute;
+  left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  line-height: 1em;
+  text-align: right;
+  bottom: 90px;
+}
+.card .card1.front .validdate span:last-child {
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+.card .card1.front .name {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: #fff;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.card .card1.back .blackbar {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  height: 60px;
+  background-color: #000;
+}
+.card .card1.back .text {
+  position: absolute;
+  top: 120px;
+  left: 30px;
+}
+.card .card1.back .text h5 {
+  color: #fff;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.card .card1.back .text .whitebar {
+  position: relative;
+  width: 400px;
+  height: 40px;
+  background: #fff;
+  margin-top: 5px;
+}
+.card .card1.back .text .ctext {
+  position: relative;
+  top: -35px;
+  left: 395px;
+  background: #ccc;
+  color: #111;
+  width: 50px;
+  height: 30px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card .card1.back .teext {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.4em;
+  font-weight: 300;
+}
