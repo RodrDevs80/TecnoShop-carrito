@@ -13,7 +13,6 @@ const principal = {
       const hDescripcion = document.createElement("p");
       const hPrecio = document.createElement("h4");
       const btnAgregarAlCarrito = document.createElement("button");
-      /* HTML: <div class="ribbon">Your text content</div> */
       const div = document.createElement("div");
       div.classList.add("ribbon");
       div.textContent = "Producto Premium";
@@ -31,7 +30,7 @@ const principal = {
 
       hDescripcion.textContent = descripcion;
       hPrecio.classList.add("precio");
-      hPrecio.textContent = `$${precio} Dolares`;
+      hPrecio.innerHTML = precio >= 500 ? `$${precio} Dolares <span class="envio-gratis"><img src="./src/assets/img/envio-free.svg" alt="envio gratis"></span> ` : `$${precio} Dolares `;
 
       btnAgregarAlCarrito.id = `add${id}`;
       btnAgregarAlCarrito.classList.add("btn-agregar-carrito");
