@@ -33,7 +33,7 @@ body {
   color: #16c60c;
   background-color: #000000;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
   vertical-align: top;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -148,15 +148,19 @@ body {
   .card {
     display: none;
   }
+
   .logo-tecno {
     width: 35%;
+  }
+  .nav-sup {
+    font-size: 0.8em;
   }
 }
 /*Quienes Somos*/
 .modal-quienes-somos {
   display: none; /* Oculto por defecto */
   position: fixed; /* Fija la posición */
-  z-index: 1; /* Asegura que esté encima de otros elementos */
+  z-index: 100; /* Asegura que esté encima de otros elementos */
   left: 50px;
   top: 0;
   width: 92%;

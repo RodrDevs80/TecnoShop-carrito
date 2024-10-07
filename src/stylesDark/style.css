@@ -19,6 +19,11 @@
   padding: 0px;
   margin: 0px;
 }
+.logo-tecno {
+  margin-top: 10px;
+  width: 15%;
+  border-radius: 50%;
+}
 
 html,
 body {
@@ -90,11 +95,17 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, 1fr);
   }
+  .logo-tecno {
+    width: 20%;
+  }
 }
 @media only screen and (max-width: 800px) {
   .contenedor-productos {
     grid-template-columns: 1fr;
     place-items: center;
+  }
+  .logo-tecno {
+    width: 22.5%;
   }
 }
 @media only screen and (max-width: 700px) {
@@ -111,7 +122,6 @@ body {
 
   .menu a {
     display: block;
-    border-bottom: 1px solid black;
     margin: 0;
     color: white;
     font-weight: bold;
@@ -122,6 +132,9 @@ body {
     /* asocia el checked al menu*/
     display: block;
   }
+  .logo-tecno {
+    width: 25%;
+  }
 }
 @media only screen and (max-width: 610px) {
   section {
@@ -130,12 +143,18 @@ body {
   .card {
     display: none;
   }
+  .logo-tecno {
+    width: 35%;
+  }
+  .nav-sup {
+    font-size: 0.8em;
+  }
 }
 /*Quienes Somos*/
 .modal-quienes-somos {
   display: none; /* Oculto por defecto */
   position: fixed; /* Fija la posición */
-  z-index: 1; /* Asegura que esté encima de otros elementos */
+  z-index: 1000; /* Asegura que esté encima de otros elementos */
   left: 50px;
   top: 0;
   width: 92%;

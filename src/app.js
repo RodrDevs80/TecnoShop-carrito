@@ -118,11 +118,16 @@ document.addEventListener("click", (e) => {
 function paymentControl(payment, carrito) {
   document.getElementById("realizar-compra").addEventListener("click", () => {
     if (carrito.productos.length == 0) {
-      alert("El carrito esta vacio");
+      Swal.fire({
+        title: "¡El carrito esta vacío! 🚨",
+        text: "Agregue un producto para poder realizar la compra 🛒",
+        icon: "error",
+        confirmButtonText: "Aceptar"
+      });
     } else {
       payment.open();
       payment.loadingSkeleton();
-      setTimeout(()=>{payment.openChooseDeliveryMethod()}, 1000);
+      setTimeout(() => { payment.openChooseDeliveryMethod() }, 1000);
     }
   });
 }
