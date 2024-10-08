@@ -66,6 +66,7 @@ const asideMenu = {
     if (producto) {
       if (producto.cantidad > 1) {
         producto.cantidad--;
+        localStorage.setItem("carrito", JSON.stringify(carrito.productos));
       } else {
         console.log("No se puede restar más, la cantidad ya es 1.");
       }
@@ -79,6 +80,7 @@ const asideMenu = {
     if (producto) {
       if (producto.cantidad < 5) {
         producto.cantidad++;
+        localStorage.setItem("carrito", JSON.stringify(carrito.productos));
       } else {
         console.log("No se pueden agregar mas de 5 productos.");
       }

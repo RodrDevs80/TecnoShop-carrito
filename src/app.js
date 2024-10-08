@@ -1,4 +1,10 @@
 const carrito = new Carrito();
+let carritoLs =  localStorage.getItem("carrito")
+if (carritoLs) {
+  JSON.parse(carritoLs).forEach((p) => {
+    carrito.agregarProducto(p)
+  });
+}
 
 const productos = [
   new Producto(
@@ -86,6 +92,7 @@ function controlCarrito(e, carrito) {
     asideMenu.mostrarProductosEnCarrito(carrito);
     asideMenu.mostrarTotalEnCarrito(carrito);
     asideMenu.open();
+    localStorage.setItem('carrito', JSON.stringify(carrito.productos));
   } else {
     switch (e.target.id) {
       case "carrito-compras":
