@@ -116,6 +116,9 @@ function controlCarrito(e, carrito) {
         break;
     }
   }
+  if (e.target.classList.contains("eliminar")){
+    localStorage.setItem('carrito', JSON.stringify(carrito.productos));
+  }
 }
 
 document.addEventListener("click", (e) => {
