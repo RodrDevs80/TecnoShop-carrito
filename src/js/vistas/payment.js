@@ -461,13 +461,22 @@ const payment = {
       return "Empresa emisora no identificada";
     }
     function resumenProductosHtml() {
-      let html = ``;
+      const containerOfProducts = document.createElement("div");
       carrito.productos.forEach((p) => {
-        html += `<div><span>${p.nombre}</span><span> x${
+        const product = document.createElement("div");
+        product.classList.add("payment-product-item");
+        product.innerHTML = `<span class="p-name"><b>Producto: </b>${
+          p.nombre
+        }</span><span class="p-quantity"><b>Unidades</b>: ${
           p.cantidad
-        }</span><span> $${p.precio.toFixed(2)}</span></div>`;
+        }</span><span class="p-unit-price"><b>Precio por Unidad</b>: $${p.precio.toFixed(
+          2
+        )}</span><span class="p-sub-total"><b>Subtotal</b>: $${(p.precio*p.cantidad).toFixed(2)}</span>`;
+
+        containerOfProducts.appendChild(product);
       });
-      return html;
+
+      return containerOfProducts.innerHTML;
     }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
@@ -520,22 +529,22 @@ const payment = {
 
     <div>
     <h2>Resumen de compra</h2>
-      <div>
+      <div class="container-of-products">
       ${resumenProductosHtml()}
       ${
         carrito.calcularTotal() <= 500
-          ? `<span>Envio: $6</span>`
-          : `<span>Envio: GRATIS</span>`
+          ? `<span><b>Envio</b>: $6</span>`
+          : `<span><b>Envio</b>: GRATIS</span>`
       }
       </div>
 
       ${
         carrito.calcularTotal() <= 500
           ? `
-      <p>Total: $${(carrito.calcularTotal() + 6).toFixed(2)}</p>
+      <p><b>Total:</b> $${(carrito.calcularTotal() + 6).toFixed(2)}</p>
         `
           : `
-      <p>Total: $${carrito.calcularTotal().toFixed(2)}</p>
+      <p><b>Total:</b> $${carrito.calcularTotal().toFixed(2)}</p>
         `
       }
     </div>

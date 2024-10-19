@@ -34,6 +34,27 @@
   display: grid;
   grid-column: auto;
   justify-content: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#payment h2 {
+  margin-bottom: 20px;
+}
+#payment p {
+  margin-bottom: 10px;
+}
+
+#payment input[type="radio"] {
+  width: 16px;
+  height: 16px;
+}
+
+#payment label,
+#payment p,
+#payment input[type="text"],
+#payment input[type="number"],
+#payment input[type="textarea"] {
+  font-size: 1.1em;
 }
 
 #payment > *:not(#payment-loading-skeleton, #thankYou) {
@@ -69,11 +90,16 @@
   align-self: center;
 }
 
-#formConfirmPurchase {
-  background-color: rgb(158, 129, 254) !important;
-  gap: 10px;
-}
-
 #formConfirmPurchase > div {
   border-bottom: 1px solid black;
+}
+
+#formConfirmPurchase .payment-product-item {
+  display: grid;
+  border: 1px black solid;
+  margin-bottom: 10px;
+}
+
+#formConfirmPurchase .payment-product-item > * {
+  margin: 6px;
 }
