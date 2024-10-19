@@ -554,7 +554,9 @@ const payment = {
         )} **** ${this.data.cardInfo.number.slice(-4)} (Credito)</p>
         <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${carrito.calcularTotal()>=500? (
               carrito.calcularTotal() / this.data.cardInfo.installments
-            ).toFixed(2): (carrito.calcularTotal()+6) / this.data.cardInfo.installments}</p>
+            ).toFixed(2)
+            : ((carrito.calcularTotal()+6) / this.data.cardInfo.installments).toFixed(2)}</p>
+        <p><strong>Total:</strong> $${(carrito.calcularTotal()+6).toFixed(2)}</p>
         `
           : ``
       }
@@ -564,7 +566,7 @@ const payment = {
         <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
           this.data.cardInfo.number
         )} **** ${this.data.cardInfo.number.slice(-4)} (Debito)</p>
-        <p><strong>Total:</strong> $ ${carrito.calcularTotal().toFixed(2)}</p>
+        <p><strong>Total:</strong> $${carrito.calcularTotal() >=500? `${carrito.calcularTotal().toFixed(2)}`:`${(carrito.calcularTotal()+6).toFixed(2)}`}</p>
         `
                 : ``
             }
