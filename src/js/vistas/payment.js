@@ -614,4 +614,63 @@ const payment = {
       return this.cardInfo;
     },
   },
+  test(vistaNumber) {
+    if (document.getElementById("payment") != null) {
+      this.close();
+      this.open();
+    } else {
+      this.open();
+    }
+    this.data = {
+      deliveryMethod: "domicilio",
+      homeDeliveryInfo: {
+        fullName: "Juan Perez",
+        postalCode: "5196",
+        province: "Cordoba",
+        city: "Santa Rosa",
+        street: "San Martin",
+        number: "546",
+        contactPhone: "351123456",
+        indications: "Casa de rejas negras",
+      },
+      paymentMethod: "credito",
+      cardInfo: {
+        type: "credito",
+        installments: "1",
+        number: "413246557",
+        name: "juan perez",
+        securityCode: "123",
+        expiryDate: "05/2024",
+        dni: "30495561",
+      },
+    };
+    switch (vistaNumber) {
+      case 1:
+        this.openChooseDeliveryMethod();
+        break;
+      case 2:
+        this.openHomeDelivery();
+        break;
+      case 3:
+        this.openConfirmHomeDelivery();
+        break;
+      case 4:
+        this.openPaymentMethod();
+        break;
+      case 5:
+        this.openEnterPaymentMethodInformation();
+        break;
+      case 6:
+        this.openSelectCreditCardInstallments();
+        break;
+      case 7:
+        this.openConfirmPurchase();
+        break;
+      case 8:
+        this.openThankYou();
+        break;
+      default:
+        break;
+    }
+  },
 };
