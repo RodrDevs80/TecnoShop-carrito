@@ -369,45 +369,88 @@ const payment = {
       this.close();
     });
     form.id = "SelectCreditCardInstallments";
-    form.innerHTML = `  
-    <h2>Seleccioná las cuotas de tarjeta de credito</h2>
-  <div>
-    <p>${identificarTarjeta(
-      this.data.cardInfo.number
-    )} **** ${this.data.cardInfo.number.slice(-4)}</p>
-    <label>
-      <input type="radio" name="installments" value="1" />
-      1x $ ${carrito.calcularTotal().toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="2" />
-      2x $ ${(carrito.calcularTotal() / 2).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="3" />
-      3x $ ${(carrito.calcularTotal() / 3).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="6" />
-      6x $ ${(carrito.calcularTotal() / 6).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="9" />
-      9x $ ${(carrito.calcularTotal() / 9).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="12" />
-      12x $ ${(carrito.calcularTotal() / 12).toFixed(2)}
-    </label>
-    <br />
-  </div>
-    <input type="submit" value="Continuar">
- `;
+    if (carrito.calcularTotal() >= 500) {
+      form.innerHTML = `
+      <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    <div>
+      <p>${identificarTarjeta(
+        this.data.cardInfo.number
+      )} **** ${this.data.cardInfo.number.slice(-4)}</p>
+      <label>
+        <input type="radio" name="installments" value="1" />
+        1x $ ${carrito.calcularTotal().toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="2" />
+        2x $ ${(carrito.calcularTotal() / 2).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="3" />
+        3x $ ${(carrito.calcularTotal() / 3).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="6" />
+        6x $ ${(carrito.calcularTotal() / 6).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="9" />
+        9x $ ${(carrito.calcularTotal() / 9).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="12" />
+        12x $ ${(carrito.calcularTotal() / 12).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+    </div>
+      <input type="submit" value="Continuar">
+   `;
+    } else{
+      form.innerHTML = `  
+      <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    <div>
+      <p>${identificarTarjeta(
+        this.data.cardInfo.number
+      )} **** ${this.data.cardInfo.number.slice(-4)}</p>
+      <label>
+        <input type="radio" name="installments" value="1" />
+        1x $ ${(carrito.calcularTotal()+6).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="2" />
+        2x $ ${((carrito.calcularTotal()+6) / 2).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="3" />
+        3x $ ${((carrito.calcularTotal()+6) / 3).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="6" />
+        6x $ ${((carrito.calcularTotal()+6) / 6).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="9" />
+        9x $ ${((carrito.calcularTotal()+6) / 9).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="12" />
+        12x $ ${((carrito.calcularTotal()+6) / 12).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+    </div>
+      <input type="submit" value="Continuar">
+   `;
+    }
+
     form.appendChild(closeBtn);
     form.addEventListener("submit", (e) => {
       e.preventDefault();
