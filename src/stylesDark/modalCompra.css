@@ -46,6 +46,7 @@
   display: inline-block;
   font-weight: 300;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .cerrar-modal:hover {
