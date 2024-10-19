@@ -102,6 +102,7 @@ const payment = {
     });
     form.id = "formHomeDelivery";
     form.innerHTML = `
+      <h2>Enviar a domicilio</h2>
               <label for="fullName">Nombre y apellido (tal cual figura en el DNI):</label>
         <input type="text" id="fullName" name="fullName" required>
 
@@ -111,7 +112,7 @@ const payment = {
         <label for="province">Provincia:</label> 
         <input type="text" id="province" name="province" required>
 
-        <label for="city">Localidad/Barrio:</label>
+        <label for="city">Ciudad:</label>
         <input type="text" id="city" name="city" required>
 
         <label for="street">Calle/Avenida:</label>
