@@ -509,9 +509,9 @@ const payment = {
         <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
           this.data.cardInfo.number
         )} **** ${this.data.cardInfo.number.slice(-4)} (Credito)</p>
-        <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${(
+        <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${carrito.calcularTotal()>=500? (
               carrito.calcularTotal() / this.data.cardInfo.installments
-            ).toFixed(2)}</p>
+            ).toFixed(2): (carrito.calcularTotal()+6) / this.data.cardInfo.installments}</p>
         `
           : ``
       }
