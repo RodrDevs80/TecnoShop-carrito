@@ -369,7 +369,7 @@ const payment = {
       this.close();
     });
     form.id = "SelectCreditCardInstallments";
-    if (carrito.calcularTotal() >= 500) {
+    if (carrito.calcularTotal() >= 500 && payment.data.deliveryMethod =="domicilio") {
       form.innerHTML = `
       <h2>Seleccioná las cuotas de tarjeta de credito</h2>
     <div>
@@ -409,7 +409,7 @@ const payment = {
     </div>
       <input type="submit" value="Continuar">
    `;
-    } else{
+    } else if(carrito.calcularTotal() < 500 && payment.data.deliveryMethod =="domicilio"){
       form.innerHTML = `  
       <h2>Seleccioná las cuotas de tarjeta de credito</h2>
     <div>
@@ -444,6 +444,46 @@ const payment = {
       <label>
         <input type="radio" name="installments" value="12" />
         12x $ ${((carrito.calcularTotal()+6) / 12).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+    </div>
+      <input type="submit" value="Continuar">
+   `;
+    } else if(payment.data.deliveryMethod == "punto_entrega"){
+      form.innerHTML = `
+      <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    <div>
+      <p>${identificarTarjeta(
+        this.data.cardInfo.number
+      )} **** ${this.data.cardInfo.number.slice(-4)}</p>
+      <label>
+        <input type="radio" name="installments" value="1" />
+        1x $ ${carrito.calcularTotal().toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="2" />
+        2x $ ${(carrito.calcularTotal() / 2).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="3" />
+        3x $ ${(carrito.calcularTotal() / 3).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="6" />
+        6x $ ${(carrito.calcularTotal() / 6).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="9" />
+        9x $ ${(carrito.calcularTotal() / 9).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="12" />
+        12x $ ${(carrito.calcularTotal() / 12).toFixed(2)} (Retira en el local)
       </label>
       <br />
     </div>
@@ -677,7 +717,7 @@ const payment = {
       this.open();
     }
     this.data = {
-      deliveryMethod: "domicilio",
+      deliveryMethod: "punto_entrega",
       homeDeliveryInfo: {
         fullName: "Juan Perez",
         postalCode: "5196",
