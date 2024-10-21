@@ -663,6 +663,32 @@ const payment = {
    
     return html
     }
+    function htmlFormatPurchaseTotalInfo(data,paymentTotal){
+      let html =``
+      if (data.deliveryMethod=="punto_entrega") {
+        // total sin envio
+        html =`
+      <p><b>Total:</b> $${paymentTotal.toFixed(2)}</p>
+        `
+      } else if(paymentTotal >= 500 && data.deliveryMethod=="domicilio"){
+        // envio gratis
+        // total
+        html = `
+        <span><b>Envio</b>: Gratis!!</span>
+        <p><b>Total:</b> $${paymentTotal.toFixed(2)}</p>
+
+        `
+      } else if(paymentTotal < 500 && data.deliveryMethod=="domicilio"){
+        // envio 
+        // total + envio
+        html = `
+        <span><b>Envio</b>: $6</span>
+        <p><b>Total:</b> $${(paymentTotal+6).toFixed(2)}</p>
+
+        `
+      }
+      return html
+    }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -683,22 +709,8 @@ const payment = {
     <h2>Resumen de compra</h2>
       <div class="container-of-products">
       ${resumenProductosHtml()}
-      ${
-        carrito.calcularTotal() <= 500
-          ? `<span><b>Envio</b>: $6</span>`
-          : `<span><b>Envio</b>: GRATIS</span>`
-      }
+      ${htmlFormatPurchaseTotalInfo(this.data,carrito.calcularTotal())}
       </div>
-
-      ${
-        carrito.calcularTotal() <= 500
-          ? `
-      <p><b>Total:</b> $${(carrito.calcularTotal() + 6).toFixed(2)}</p>
-        `
-          : `
-      <p><b>Total:</b> $${carrito.calcularTotal().toFixed(2)}</p>
-        `
-      }
     </div>
 
     <input type="submit" value="Confirmar Compra">
@@ -784,7 +796,7 @@ const payment = {
       this.open();
     }
     this.data = {
-      deliveryMethod: "punto_entrega",
+      deliveryMethod: "domicilio",
       homeDeliveryInfo: {
         fullName: "Juan Perez",
         postalCode: "5196",
