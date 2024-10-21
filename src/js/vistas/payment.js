@@ -102,6 +102,7 @@ const payment = {
     });
     form.id = "formHomeDelivery";
     form.innerHTML = `
+      <h2>Enviar a domicilio</h2>
               <label for="fullName">Nombre y apellido (tal cual figura en el DNI):</label>
         <input type="text" id="fullName" name="fullName" required>
 
@@ -111,7 +112,7 @@ const payment = {
         <label for="province">Provincia:</label> 
         <input type="text" id="province" name="province" required>
 
-        <label for="city">Localidad/Barrio:</label>
+        <label for="city">Ciudad:</label>
         <input type="text" id="city" name="city" required>
 
         <label for="street">Calle/Avenida:</label>
@@ -368,45 +369,128 @@ const payment = {
       this.close();
     });
     form.id = "SelectCreditCardInstallments";
-    form.innerHTML = `  
-    <h2>Seleccioná las cuotas de tarjeta de credito</h2>
-  <div>
-    <p>${identificarTarjeta(
-      this.data.cardInfo.number
-    )} **** ${this.data.cardInfo.number.slice(-4)}</p>
-    <label>
-      <input type="radio" name="installments" value="1" />
-      1x $ ${carrito.calcularTotal().toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="2" />
-      2x $ ${(carrito.calcularTotal() / 2).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="3" />
-      3x $ ${(carrito.calcularTotal() / 3).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="6" />
-      6x $ ${(carrito.calcularTotal() / 6).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="9" />
-      9x $ ${(carrito.calcularTotal() / 9).toFixed(2)}
-    </label>
-    <br />
-    <label>
-      <input type="radio" name="installments" value="12" />
-      12x $ ${(carrito.calcularTotal() / 12).toFixed(2)}
-    </label>
-    <br />
-  </div>
-    <input type="submit" value="Continuar">
- `;
+    if (carrito.calcularTotal() >= 500 && payment.data.deliveryMethod =="domicilio") {
+      form.innerHTML = `
+      <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    <div>
+      <p>${identificarTarjeta(
+        this.data.cardInfo.number
+      )} **** ${this.data.cardInfo.number.slice(-4)}</p>
+      <label>
+        <input type="radio" name="installments" value="1" />
+        1x $ ${carrito.calcularTotal().toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="2" />
+        2x $ ${(carrito.calcularTotal() / 2).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="3" />
+        3x $ ${(carrito.calcularTotal() / 3).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="6" />
+        6x $ ${(carrito.calcularTotal() / 6).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="9" />
+        9x $ ${(carrito.calcularTotal() / 9).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="12" />
+        12x $ ${(carrito.calcularTotal() / 12).toFixed(2)} (Envio Gratis!!)
+      </label>
+      <br />
+    </div>
+      <input type="submit" value="Continuar">
+   `;
+    } else if(carrito.calcularTotal() < 500 && payment.data.deliveryMethod =="domicilio"){
+      form.innerHTML = `  
+      <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    <div>
+      <p>${identificarTarjeta(
+        this.data.cardInfo.number
+      )} **** ${this.data.cardInfo.number.slice(-4)}</p>
+      <label>
+        <input type="radio" name="installments" value="1" />
+        1x $ ${(carrito.calcularTotal()+6).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="2" />
+        2x $ ${((carrito.calcularTotal()+6) / 2).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="3" />
+        3x $ ${((carrito.calcularTotal()+6) / 3).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="6" />
+        6x $ ${((carrito.calcularTotal()+6) / 6).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="9" />
+        9x $ ${((carrito.calcularTotal()+6) / 9).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="12" />
+        12x $ ${((carrito.calcularTotal()+6) / 12).toFixed(2)} </br>($6 de Envio Incluidos)
+      </label>
+      <br />
+    </div>
+      <input type="submit" value="Continuar">
+   `;
+    } else if(payment.data.deliveryMethod == "punto_entrega"){
+      form.innerHTML = `
+      <h2>Seleccioná las cuotas de tarjeta de credito</h2>
+    <div>
+      <p>${identificarTarjeta(
+        this.data.cardInfo.number
+      )} **** ${this.data.cardInfo.number.slice(-4)}</p>
+      <label>
+        <input type="radio" name="installments" value="1" />
+        1x $ ${carrito.calcularTotal().toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="2" />
+        2x $ ${(carrito.calcularTotal() / 2).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="3" />
+        3x $ ${(carrito.calcularTotal() / 3).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="6" />
+        6x $ ${(carrito.calcularTotal() / 6).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="9" />
+        9x $ ${(carrito.calcularTotal() / 9).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+      <label>
+        <input type="radio" name="installments" value="12" />
+        12x $ ${(carrito.calcularTotal() / 12).toFixed(2)} (Retira en el local)
+      </label>
+      <br />
+    </div>
+      <input type="submit" value="Continuar">
+   `;
+    }
+
     form.appendChild(closeBtn);
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -460,13 +544,22 @@ const payment = {
       return "Empresa emisora no identificada";
     }
     function resumenProductosHtml() {
-      let html = ``;
+      const containerOfProducts = document.createElement("div");
       carrito.productos.forEach((p) => {
-        html += `<div><span>${p.nombre}</span><span> x${
+        const product = document.createElement("div");
+        product.classList.add("payment-product-item");
+        product.innerHTML = `<span class="p-name"><b>Producto: </b>${
+          p.nombre
+        }</span><span class="p-quantity"><b>Unidades</b>: ${
           p.cantidad
-        }</span><span> $${p.precio.toFixed(2)}</span></div>`;
+        }</span><span class="p-unit-price"><b>Precio por Unidad</b>: $${p.precio.toFixed(
+          2
+        )}</span><span class="p-sub-total"><b>Subtotal</b>: $${(p.precio*p.cantidad).toFixed(2)}</span>`;
+
+        containerOfProducts.appendChild(product);
       });
-      return html;
+
+      return containerOfProducts.innerHTML;
     }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
@@ -499,9 +592,11 @@ const payment = {
         <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
           this.data.cardInfo.number
         )} **** ${this.data.cardInfo.number.slice(-4)} (Credito)</p>
-        <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${(
+        <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${carrito.calcularTotal()>=500? (
               carrito.calcularTotal() / this.data.cardInfo.installments
-            ).toFixed(2)}</p>
+            ).toFixed(2)
+            : ((carrito.calcularTotal()+6) / this.data.cardInfo.installments).toFixed(2)}</p>
+        <p><strong>Total:</strong> $${(carrito.calcularTotal()+6).toFixed(2)}</p>
         `
           : ``
       }
@@ -511,7 +606,7 @@ const payment = {
         <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
           this.data.cardInfo.number
         )} **** ${this.data.cardInfo.number.slice(-4)} (Debito)</p>
-        <p><strong>Total:</strong> $ ${carrito.calcularTotal().toFixed(2)}</p>
+        <p><strong>Total:</strong> $${carrito.calcularTotal() >=500? `${carrito.calcularTotal().toFixed(2)}`:`${(carrito.calcularTotal()+6).toFixed(2)}`}</p>
         `
                 : ``
             }
@@ -519,22 +614,22 @@ const payment = {
 
     <div>
     <h2>Resumen de compra</h2>
-      <div>
+      <div class="container-of-products">
       ${resumenProductosHtml()}
       ${
         carrito.calcularTotal() <= 500
-          ? `<span>Envio: $6</span>`
-          : `<span>Envio: GRATIS</span>`
+          ? `<span><b>Envio</b>: $6</span>`
+          : `<span><b>Envio</b>: GRATIS</span>`
       }
       </div>
 
       ${
         carrito.calcularTotal() <= 500
           ? `
-      <p>Total: $${(carrito.calcularTotal() + 6).toFixed(2)}</p>
+      <p><b>Total:</b> $${(carrito.calcularTotal() + 6).toFixed(2)}</p>
         `
           : `
-      <p>Total: $${carrito.calcularTotal().toFixed(2)}</p>
+      <p><b>Total:</b> $${carrito.calcularTotal().toFixed(2)}</p>
         `
       }
     </div>
@@ -613,5 +708,64 @@ const payment = {
     getCardInfo() {
       return this.cardInfo;
     },
+  },
+  test(vistaNumber) {
+    if (document.getElementById("payment") != null) {
+      this.close();
+      this.open();
+    } else {
+      this.open();
+    }
+    this.data = {
+      deliveryMethod: "punto_entrega",
+      homeDeliveryInfo: {
+        fullName: "Juan Perez",
+        postalCode: "5196",
+        province: "Cordoba",
+        city: "Santa Rosa",
+        street: "San Martin",
+        number: "546",
+        contactPhone: "351123456",
+        indications: "Casa de rejas negras",
+      },
+      paymentMethod: "credito",
+      cardInfo: {
+        type: "credito",
+        installments: "1",
+        number: "413246557",
+        name: "juan perez",
+        securityCode: "123",
+        expiryDate: "05/2024",
+        dni: "30495561",
+      },
+    };
+    switch (vistaNumber) {
+      case 1:
+        this.openChooseDeliveryMethod();
+        break;
+      case 2:
+        this.openHomeDelivery();
+        break;
+      case 3:
+        this.openConfirmHomeDelivery();
+        break;
+      case 4:
+        this.openPaymentMethod();
+        break;
+      case 5:
+        this.openEnterPaymentMethodInformation();
+        break;
+      case 6:
+        this.openSelectCreditCardInstallments();
+        break;
+      case 7:
+        this.openConfirmPurchase();
+        break;
+      case 8:
+        this.openThankYou();
+        break;
+      default:
+        break;
+    }
   },
 };
