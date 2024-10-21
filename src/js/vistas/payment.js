@@ -561,6 +561,32 @@ const payment = {
 
       return containerOfProducts.innerHTML;
     }
+
+    function htmlFormatDeliveryInfo(data) {
+      let html = ""
+      
+      if (data.deliveryMethod=="domicilio") {
+        html=`
+        <div>
+          <h2>Detalle de Envio</h2>
+          <p><strong>Nombre:</strong> ${data.homeDeliveryInfo.fullName}</p>
+          <p><strong>Direccion:</strong> ${data.homeDeliveryInfo.street} ${data.homeDeliveryInfo.number}</p>
+          <p><strong>Ciudad:</strong> ${data.homeDeliveryInfo.city}, ${data.homeDeliveryInfo.province}</p>
+          <p><strong>Codigo Postal:</strong> ${data.homeDeliveryInfo.postalCode}</p>
+        </div>
+            `
+    } else if(data.deliveryMethod=="punto_entrega"){
+      html=`
+      <div>
+        <h2>Retirar en el local</h2>
+        <p><b>Direccion:</b>  Avenida Siempreviva 742, Springfield, EEUU</p>
+        <p style="font-size: small; color:grey">Luego de confirmar la compra, acercate a nuestro local con tu comprobante para retirar los productos</p>
+      </div>
+          `
+    }
+
+    return html
+  }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -571,18 +597,7 @@ const payment = {
     });
     form.id = "formConfirmPurchase";
     form.innerHTML = ` 
-    ${
-      this.data.deliveryMethod == "domicilio"
-        ? `    <div>
-      <h2>Detalle de Envio</h2>
-      <p><strong>Nombre:</strong> ${this.data.homeDeliveryInfo.fullName}</p>
-      <p><strong>Direccion:</strong> ${this.data.homeDeliveryInfo.street} ${this.data.homeDeliveryInfo.number}</p>
-      <p><strong>Ciudad:</strong> ${this.data.homeDeliveryInfo.city}, ${this.data.homeDeliveryInfo.province}</p>
-      <p><strong>Codigo Postal:</strong> ${this.data.homeDeliveryInfo.postalCode}</p>
-    </div>`
-        : ""
-    }
-
+    ${htmlFormatDeliveryInfo(this.data)}
     <div>
       <h2>Detalle de pago</h2>
 
