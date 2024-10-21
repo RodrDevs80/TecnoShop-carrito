@@ -586,7 +586,83 @@ const payment = {
     }
 
     return html
-  }
+    }
+    function htmlFormatPaymentInfo(data, paymentTotal) {
+      let html = ""
+      if (data.deliveryMethod=="punto_entrega" ) {
+        switch (data.paymentMethod) {
+          case "credito":
+  
+          html=`<p><strong>Metodo de pago:</strong> ${identificarTarjeta(data.cardInfo.number)} **** ${data.cardInfo.number.slice(-4)} (Credito)</p>
+          <p><strong>Productos:</strong> $${paymentTotal.toFixed(2)} </p>
+          <p><strong>Cuotas:</strong> ${data.cardInfo.installments}x $${(paymentTotal / data.cardInfo.installments).toFixed(2)} </p>
+          <p><strong>Total:</strong> $${paymentTotal.toFixed(2)}</p>
+          `
+          break;
+          case "debito":
+            html=`<p><strong>Metodo de pago:</strong> ${identificarTarjeta(data.cardInfo.number)} **** ${data.cardInfo.number.slice(-4)} (Debito)</p>
+            <p><strong>Productos:</strong> $${paymentTotal.toFixed(2)} 
+            <p><strong>Total:</strong> $${paymentTotal.toFixed(2)}
+            `
+          break;
+        
+          default:
+            break;
+        }
+    } else if(data.deliveryMethod=="domicilio" && (paymentTotal>=500)){
+      switch (data.paymentMethod) {
+        case "credito":
+
+        html=`
+        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(data.cardInfo.number)} **** ${data.cardInfo.number.slice(-4)} (Credito)</p>
+        <p><strong>Productos:</strong> $${paymentTotal.toFixed(2)} </p>
+        <p><strong>Envio:</strong> Gratis!!</p>
+        <p><strong>Total:</strong> $${(paymentTotal).toFixed(2)}</p>
+        <p><strong>Cuotas:</strong> ${data.cardInfo.installments}x $${((paymentTotal) / data.cardInfo.installments).toFixed(2)} </p>
+        `
+        break;
+        case "debito":
+          html=`
+          <p><strong>Metodo de pago:</strong> ${identificarTarjeta(data.cardInfo.number)} **** ${data.cardInfo.number.slice(-4)} (Debito)</p>
+          <p><strong>Productos:</strong> $${paymentTotal.toFixed(2)}</p> 
+          <p><strong>Envio: Gratis!!</strong></p>
+          <p><strong>Total:</strong> $${(paymentTotal).toFixed(2)}</p>
+
+          `
+        break;
+      
+        default:
+          break;
+      }
+    } else if(data.deliveryMethod=="domicilio" && (paymentTotal<500)){
+      switch (data.paymentMethod) {
+        case "credito":
+
+        html=`
+        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(data.cardInfo.number)} **** ${data.cardInfo.number.slice(-4)} (Credito)</p>
+        <p><strong>Productos:</strong> $${paymentTotal.toFixed(2)} </p>
+        <p><strong>Envio:</strong> $6</p>
+        <p><strong>Total:</strong> $${(paymentTotal+6).toFixed(2)}</p>
+        <p><strong>Cuotas:</strong> ${data.cardInfo.installments}x $${((paymentTotal+6) / data.cardInfo.installments).toFixed(2)} </p>
+        `
+        break;
+        case "debito":
+          html=`
+          <p><strong>Metodo de pago:</strong> ${identificarTarjeta(data.cardInfo.number)} **** ${data.cardInfo.number.slice(-4)} (Debito)</p>
+          <p><strong>Productos:</strong> $${paymentTotal.toFixed(2)}</p> 
+          <p><strong>Envio:</strong> $6</p>
+          <p><strong>Total:</strong> $${(paymentTotal+6).toFixed(2)}</p>
+
+          `
+        break;
+      
+        default:
+          break;
+      }
+    }
+   
+    return html
+    }
     const modal = document.getElementById("payment");
     const form = document.createElement("form");
     const closeBtn = document.createElement("button");
@@ -600,31 +676,7 @@ const payment = {
     ${htmlFormatDeliveryInfo(this.data)}
     <div>
       <h2>Detalle de pago</h2>
-
-      ${
-        this.data.cardInfo.type == "credito"
-          ? `
-        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
-          this.data.cardInfo.number
-        )} **** ${this.data.cardInfo.number.slice(-4)} (Credito)</p>
-        <p><strong>cuotas:</strong> ${this.data.cardInfo.installments}x $ ${carrito.calcularTotal()>=500? (
-              carrito.calcularTotal() / this.data.cardInfo.installments
-            ).toFixed(2)
-            : ((carrito.calcularTotal()+6) / this.data.cardInfo.installments).toFixed(2)}</p>
-        <p><strong>Total:</strong> $${(carrito.calcularTotal()+6).toFixed(2)}</p>
-        `
-          : ``
-      }
-            ${
-              this.data.cardInfo.type == "debito"
-                ? `
-        <p><strong>Metodo de pago:</strong> ${identificarTarjeta(
-          this.data.cardInfo.number
-        )} **** ${this.data.cardInfo.number.slice(-4)} (Debito)</p>
-        <p><strong>Total:</strong> $${carrito.calcularTotal() >=500? `${carrito.calcularTotal().toFixed(2)}`:`${(carrito.calcularTotal()+6).toFixed(2)}`}</p>
-        `
-                : ``
-            }
+      ${htmlFormatPaymentInfo(this.data,carrito.calcularTotal())}
     </div>
 
     <div>
