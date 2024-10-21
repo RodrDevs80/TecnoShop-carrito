@@ -1,3 +1,5 @@
+
+
 class App {
   constructor(productos = [], carrito = []) {
     this.productos = productos;
@@ -19,8 +21,7 @@ class Producto {
     id = undefined
   ) {
     if (id == undefined) {
-      this.id =
-        (Math.random() * 1000).toFixed() * (Math.random() * 15).toFixed();
+      this.id = (Math.random() * 1000).toFixed() * (Math.random() * 15).toFixed();
     } else {
       this.id = id;
     }
